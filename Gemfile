@@ -1,0 +1,2 @@
+source "http://rubygems.rc"
+

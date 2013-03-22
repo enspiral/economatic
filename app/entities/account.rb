@@ -1,13 +1,15 @@
+require 'money'
+
 class Account
   def initialize(account_identifier)
 
   end
 
-  def add_transaction(options)
-
+  def balance
+    build_money(0.0)
   end
 
-  def balance
-
+  def build_money(amount)
+    Money.new(amount)
   end
 end

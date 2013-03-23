@@ -19,7 +19,7 @@ describe MoneyAttribute do
     ActiveRecord::Migration.verbose = false
     ActiveRecord::Schema.define() do
       create_table :test_records do |t|
-        t.decimal :numeric_test
+        t.decimal :numeric_amount
       end
     end
   end
@@ -29,27 +29,32 @@ describe MoneyAttribute do
 
   class TestRecord < ActiveRecord::Base
     include MoneyAttribute
-    money_attribute :test
+    money_attribute :amount
   end
 
   subject {TestRecord.new}
   it "has an attr_accesible" do
-    subject.test.should == nil
+    subject.amount.should == nil
   end
 
   it "saves money" do
-    subject.test = Money.new(-20.0)
-    subject.numeric_test.should == -20.0
+    subject.amount = Money.new(-20.0)
+    subject.numeric_amount.should == -20.0
   end
 
   it "loads minimum balance" do
   end
 
   it "sets sets money to nil" do
-    subject.test = Money.new(-20.0)
-    subject.test = nil
-    subject.numeric_test.should == nil
-    subject.test.should == nil
+    subject.amount = Money.new(-20.0)
+    subject.amount = nil
+    subject.numeric_amount.should == nil
+    subject.amount.should == nil
+  end
+
+  it "creates object successfully" do
+    record = TestRecord.create!(amount: 2.0)
+    record.amount.should == Money.new(2.0)
   end
 
 end

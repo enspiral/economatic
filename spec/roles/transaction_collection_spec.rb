@@ -2,14 +2,7 @@ require 'spec_helper'
 require 'transaction_collection'
 
 describe TransactionCollection do
-  class Actor
-    def initialize 
-      self.id = 1
-    end
-    attr_accessor :id
-  end
-
-  let(:actor) {Actor.new}
+  let(:actor) {Object.new.tap {|a| a.stub!(:id => 1)}}
   subject { actor.extend TransactionCollection }
 
   describe 'balance' do

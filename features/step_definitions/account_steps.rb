@@ -11,6 +11,12 @@ CAPTURE_MONEY = Transform /^(\$)(\-?\d+)$/ do |currency_symbol, amount|
   Money.new(amount.to_f)
 end
 
+CAPTURE_ACCOUNT = Transform /^([^ ]*) account$/ do |account_identifier|
+  account = @accounts[account_identifier]
+  raise 'Account not found' if account.nil?
+  account
+end
+
 Given /^a bank$/ do
   @bank = Bank.new
 end
@@ -25,20 +31,17 @@ Given /^a user ([^ ]*)$/ do |user_name|
   @users[user_name] = @user = User.create(name: user_name)
 end
 
-Given /^a user ([^ ]*) who can operate ([^ ]*)/ do |user_name, account_identifier|
+Given /^a user ([^ ]*) who can operate (#{CAPTURE_ACCOUNT})$/ do |user_name, account|
   step("a user #{user_name}")
-  account = @accounts[account_identifier]
   AccountHolderRole.create!(user_id: @user.id, account_id: account.id)
 end
 
-Given /^a user ([^ ]*) who can not operate ([^ ]*)$/ do |user_name, account_identifier|
+Given /^a user ([^ ]*) who can not operate (#{CAPTURE_ACCOUNT})$/ do |user_name, account|
   step("a user #{user_name}")
 end
 
 
-When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from ([^ ]*) to ([^ ]*)$/ do |user_name, amount, source_account_identifier, destination_account_identifier|
-  source_account = @accounts[source_account_identifier]
-  destination_account = @accounts[destination_account_identifier]
+When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPTURE_ACCOUNT})$/ do |user_name, amount, source_account, destination_account|
   user = @users[user_name]
   context = TransferMoneyContext.new(
     bank: @bank,
@@ -56,18 +59,14 @@ When /^(.*) an error should be raised$/ do |original_step|
   }.to raise_error
 end
 
-Then /^([^ ]*) account has (#{CAPTURE_MONEY})$/ do |account_identifier, amount|
-  account = @accounts[account_identifier]
-
+Then /^(#{CAPTURE_ACCOUNT}) has a balance of (#{CAPTURE_MONEY})$/ do |account, amount|
   context = BalanceEnquiryContext.new(
     account: account
   )
   context.call.should == amount
 end
 
-Then /^([^ ]*) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|from) ([^ ]*) in the transaction log$/ do |target_account_identifier, amount, user_name, to_from, actor_account_identifier|
-  target_account = @accounts[target_account_identifier]
-  actor_account = @accounts[actor_account_identifier]
+Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|from) (#{CAPTURE_ACCOUNT}) in the transaction log$/ do |target_account, amount, user_name, to_from, actor_account|
   user = @users[user_name]
 
   context = TransactionListContext.new(
@@ -85,3 +84,9 @@ Then /^([^ ]*) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|from) ([^ ]*)
     last_transaction.destination_account_id.should == target_account.id
   end
 end
+
+Given /^(#{CAPTURE_ACCOUNT}) has an overdraft limit of (#{CAPTURE_MONEY})$/ do |account, amount|
+  account.minimum_balance = amount
+  account.save
+end
+

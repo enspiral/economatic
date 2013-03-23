@@ -1,6 +1,8 @@
 require 'bank'
 require "account"
 require "user"
+require "account_role"
+
 require 'transfer_money_context'
 require 'balance_enquiry_context'
 require 'transaction_list_context'
@@ -18,10 +20,21 @@ Given /^account ([^ ]*)/ do |account_identifier|
   @accounts[account_identifier] = Account.create
 end
 
-Given /^a user ([^ ]*) who can operate ([^ ]*)/ do |user_name, account_identifier|
+Given /^a user ([^ ]*)$/ do |user_name|
   @users ||= {}
-  @users[user_name] = User.create(name: user_name)
+  @users[user_name] = @user = User.create(name: user_name)
 end
+
+Given /^a user ([^ ]*) who can operate ([^ ]*)/ do |user_name, account_identifier|
+  step("a user #{user_name}")
+  account = @accounts[account_identifier]
+  AccountHolderRole.create!(user: @user, account: account)
+end
+
+Given /^a user ([^ ]*) who can not operate ([^ ]*)$/ do |user_name, account_identifier|
+  step("a user #{user_name}")
+end
+
 
 When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from ([^ ]*) to ([^ ]*)/ do |user_name, amount, source_account_identifier, destination_account_identifier|
   source_account = @accounts[source_account_identifier]
@@ -29,9 +42,9 @@ When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from ([^ ]*) to ([^ ]*)/ do |user_na
   user = @users[user_name]
   context = TransferMoneyContext.new(
     bank: @bank,
-    source_account_id: source_account.id,
-    destination_account_id: destination_account.id,
-    creator_id: user.id,
+    source_account: source_account,
+    destination_account: destination_account,
+    creator: user,
     amount: amount
   )
   context.call

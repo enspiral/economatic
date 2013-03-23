@@ -13,4 +13,9 @@ ActiveRecord::Schema.define() do
   create_table :users do |t|
     t.string :name
   end
+
+  create_table :account_roles do |t|
+    t.integer :user_id, :account_id
+    t.string :type
+  end
 end

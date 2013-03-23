@@ -27,7 +27,7 @@ When /^([^ ]*) transfers (\d+) from ([^ ]*) to ([^ ]*)/ do |user_name, amount, s
     bank: @bank,
     source_account: source_account,
     destination_account: destination_account,
-    transferer: user,
+    creator: user,
     amount: amount
   )
   context.call

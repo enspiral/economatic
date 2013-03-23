@@ -4,11 +4,12 @@ Feature:
   I want to be able to transfer money to another account
 
   Scenario: Succesfully transfer money
+    Given a bank
     Given account FrodoSavings
     Given account BilboChecking
     Given a user Gandhalf who can operate FrodoSavings
     When Gandhalf transfers 50 from FrodoSaving to BilboChecking
-    Then FrodoSavings has -50
-    Then BilboChecking has 50
+    Then FrodoSavings account has -50
+    Then BilboChecking account has 50
     Then FrodoSaving has a 50 transaction by Gandhalf to BilboChecking in the transaction log
     Then BilboChecking has a 50 transaction by Gandhalf from FrodoSaving in the transaction log

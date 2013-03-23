@@ -1,6 +1,12 @@
+require 'bank'
 require "account"
 require "user"
 require 'transfer_money_context'
+require 'balance_enquiry_context'
+
+Given /^a bank$/ do
+  @bank = Bank.new
+end
 
 Given /^account ([^ ]*)/ do |account_identifier|
   @accounts ||= {}
@@ -18,6 +24,7 @@ When /^([^ ]*) transfers (\d+) from ([^ ]*) to ([^ ]*)/ do |user_name, amount, s
   user = @users[user_name]
 
   context = TransferMoneyContext.new(
+    bank: @bank,
     source_account: source_account,
     destination_account: destination_account,
     transferer: user,
@@ -26,7 +33,11 @@ When /^([^ ]*) transfers (\d+) from ([^ ]*) to ([^ ]*)/ do |user_name, amount, s
   context.call
 end
 
-Then /^([^ ]*) has (\-?\d+)$/ do |account_identifier, amount|
+Then /^([^ ]*) account has (\-?\d+)$/ do |account_identifier, amount|
   account = @accounts[account_identifier]
-  account.balance.should == account.build_money(amount.to_f)
+
+  context = BalanceEnquiryContext.new(
+    account: account
+  )
+  context.call.amount.should == amount.to_f
 end

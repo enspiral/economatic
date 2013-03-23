@@ -28,7 +28,7 @@ end
 Given /^a user ([^ ]*) who can operate ([^ ]*)/ do |user_name, account_identifier|
   step("a user #{user_name}")
   account = @accounts[account_identifier]
-  AccountHolderRole.create!(user: @user, account: account)
+  AccountHolderRole.create!(user_id: @user.id, account_id: account.id)
 end
 
 Given /^a user ([^ ]*) who can not operate ([^ ]*)$/ do |user_name, account_identifier|
@@ -36,7 +36,7 @@ Given /^a user ([^ ]*) who can not operate ([^ ]*)$/ do |user_name, account_iden
 end
 
 
-When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from ([^ ]*) to ([^ ]*)/ do |user_name, amount, source_account_identifier, destination_account_identifier|
+When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from ([^ ]*) to ([^ ]*)$/ do |user_name, amount, source_account_identifier, destination_account_identifier|
   source_account = @accounts[source_account_identifier]
   destination_account = @accounts[destination_account_identifier]
   user = @users[user_name]
@@ -48,6 +48,12 @@ When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from ([^ ]*) to ([^ ]*)/ do |user_na
     amount: amount
   )
   context.call
+end
+
+When /^(.*) an error should be raised$/ do |original_step|
+  expect {
+    step(original_step)
+  }.to raise_error
 end
 
 Then /^([^ ]*) account has (#{CAPTURE_MONEY})$/ do |account_identifier, amount|

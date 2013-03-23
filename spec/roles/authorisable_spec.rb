@@ -14,11 +14,8 @@ describe Authorisable do
       subject.role_for(account).should == role
     end
 
-    it "returns an unsaved base class if no role is present" do
-      result = subject.role_for(account)
-      result.id.should be_nil
-      result.account_id.should == account.id
-      result.user_id.should == 2
+    it "returns a null account role no role is present" do
+      result = subject.role_for(account).should be_a NullAccountRole
     end
   end
 end

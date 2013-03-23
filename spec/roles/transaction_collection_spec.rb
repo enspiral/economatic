@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'transaction_summer'
+require 'transaction_collection'
 
-describe TransactionSummer do
+describe TransactionCollection do
   class Actor
     def initialize 
       self.id = 1
@@ -9,15 +9,15 @@ describe TransactionSummer do
     attr_accessor :id
   end
 
-  describe 'balance' do
-    let(:actor) {Actor.new}
-    subject { actor.extend TransactionSummer }
+  let(:actor) {Actor.new}
+  subject { actor.extend TransactionCollection }
 
+  describe 'balance' do
     it 'returns incoming transactions - outgoing transactions' do
       incoming_scope = stub(:incoming_scope)
-      incoming_scope.stub(:sum).with(:amount).and_return(30)
+      incoming_scope.stub(:sum).with(:numeric_amount).and_return(30)
       outgoing_scope = stub(:outgoing_scope)
-      outgoing_scope.stub(:sum).with(:amount).and_return(20)
+      outgoing_scope.stub(:sum).with(:numeric_amount).and_return(20)
 
       Transaction.stub(:where).with(source_account_id: subject.id).and_return(outgoing_scope)
       Transaction.stub(:where).with(destination_account_id: subject.id).and_return(incoming_scope)

@@ -1,5 +1,5 @@
-class User
-  def initialize(options)
+require 'active_record'
 
-  end
+class User < ActiveRecord::Base
+  attr_accessible :name
 end

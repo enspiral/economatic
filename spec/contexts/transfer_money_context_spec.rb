@@ -25,7 +25,7 @@ describe TransferMoneyContext do
           source_account: account1,
           destination_account: account2,
           creator: user,
-          amount: amount.amount,
+          amount: amount,
           time: now
       )
 

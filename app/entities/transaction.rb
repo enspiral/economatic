@@ -17,7 +17,16 @@ class Transaction < ActiveRecord::Base
     where("source_account_id = :account_id OR destination_account_id = :account_id",{account_id: account_id})
   }
 
-  def self.with_account(account)
-
+  def amount
+    Money.new(numeric_amount) if numeric_amount
   end
+
+  def amount= money
+    if money.nil?
+      self.numeric_amount = nil
+    else
+      self.numeric_amount = money.amount
+    end
+  end
+
 end

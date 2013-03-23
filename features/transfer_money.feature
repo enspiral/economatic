@@ -11,5 +11,5 @@ Feature:
     When Gandhalf transfers $50 from FrodoSavings to BilboChecking
     Then FrodoSavings account has $-50
     Then BilboChecking account has $50
-    Then FrodoSaving has a $50 transaction by Gandhalf to BilboChecking in the transaction log
-    Then BilboChecking has a $50 transaction by Gandhalf from FrodoSaving in the transaction log
+    Then FrodoSavings has a $50 transaction by Gandhalf to BilboChecking in the transaction log
+    Then BilboChecking has a $50 transaction by Gandhalf from FrodoSavings in the transaction log

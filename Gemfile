@@ -1,6 +1,8 @@
 source "http://rubygems.rc"
 
-gem 'virtus'
+gem 'activerecord'
+gem 'sqlite3'
+gem 'rake'
 
 group :test do
   gem 'timecop'

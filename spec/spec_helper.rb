@@ -1,1 +1,1 @@
-require_relative 'support/paths.rb'
+require_relative '../paths.rb'

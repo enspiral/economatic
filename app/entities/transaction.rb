@@ -1,14 +1,14 @@
+require 'active_record'
 require 'entity'
 require 'account'
 require 'money'
 require 'user'
 
-class Transaction
+class Transaction < ActiveRecord::Base
   include Entity
 
-  attribute :source, Account
-  attribute :destination, Account
-  attribute :time, DateTime
-  attribute :amount, Money
-  attribute :creator, User
+  attr_accessible :source_id, :destination_id, :time, :amount, :creator_id
+
+  def self.with_account(account)
+  end
 end

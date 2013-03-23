@@ -8,8 +8,8 @@ Feature:
     Given account FrodoSavings
     Given account BilboChecking
     Given a user Gandhalf who can operate FrodoSavings
-    When Gandhalf transfers 50 from FrodoSaving to BilboChecking
-    Then FrodoSavings account has -50
-    Then BilboChecking account has 50
-    Then FrodoSaving has a 50 transaction by Gandhalf to BilboChecking in the transaction log
-    Then BilboChecking has a 50 transaction by Gandhalf from FrodoSaving in the transaction log
+    When Gandhalf transfers $50 from FrodoSavings to BilboChecking
+    Then FrodoSavings account has $-50
+    Then BilboChecking account has $50
+    Then FrodoSaving has a $50 transaction by Gandhalf to BilboChecking in the transaction log
+    Then BilboChecking has a $50 transaction by Gandhalf from FrodoSaving in the transaction log

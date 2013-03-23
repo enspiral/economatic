@@ -9,6 +9,7 @@ class TransferMoneyContext
   #time
   def initialize(actors)
     @bank = actors.delete(:bank)
+    actors[:amount] = actors[:amount].amount
     @transaction_arguments = actors
   end
 

@@ -1,12 +1,12 @@
-require 'money'
-require 'transaction'
+require 'transaction_summer'
 
 class BalanceEnquiryContext
   def initialize(actors)
     @account = actors[:account]
+    @account.extend TransactionSummer
   end
 
   def call
-    Transaction.with_account(@account).map(&:amount).sum
+    @account.balance
   end
 end

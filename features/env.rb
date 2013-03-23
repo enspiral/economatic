@@ -1,1 +1,2 @@
-require_relative '../spec/support/paths.rb'
+require_relative '../paths.rb'
+require 'boot'

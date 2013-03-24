@@ -8,6 +8,22 @@ class Money
   def ==(other)
     @amount.to_f == other.amount.to_f
   end
+
+  def <(other)
+    amount < other.amount
+  end
+
+  def >(other)
+    amount > other.amount
+  end
+
+  def -@
+    Money.new(-amount)
+  end
+
+  def -(other)
+    Money.new(amount - other.amount)
+  end
 end
 
 module MoneyAttribute

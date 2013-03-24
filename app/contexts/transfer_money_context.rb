@@ -1,6 +1,6 @@
 require 'transaction'
 require 'authorisable'
-require 'transaction_collection'
+require 'transaction_source'
 
 class TransferMoneyContext
   class CannotTransferMoney < Exception; end

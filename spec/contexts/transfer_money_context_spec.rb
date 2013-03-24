@@ -5,7 +5,7 @@ require 'transfer_money_context'
 
 describe TransferMoneyContext do
   let(:bank) { mock(:bank) }
-  let(:account1) { mock(:account1) }
+  let(:account1) { mock(:account1, minimum_balance: nil) }
   let(:account2) { mock(:account2) }
   let(:user) { mock(:user) }
   let(:amount) { Money.new(12.0) }

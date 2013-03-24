@@ -4,10 +4,11 @@ Feature:
   I want to be able to transfer money to another account
 
   Background:
-    Given a bank
-    Given account FrodoSavings
-    Given account BilboChecking
+    Given a bank ShireTimebank
+    Given account FrodoSavings in ShireTimebank
+    Given account BilboChecking in ShireTimebank
     Given a user Gandhalf who can operate FrodoSavings account
+    Given FrodoSavings account has an overdraft limit of $-100
 
   Scenario: Succesfully transfer money
     When Gandhalf transfers $50 from FrodoSavings account to BilboChecking account
@@ -32,3 +33,8 @@ Feature:
     | overdraft_limit | transfer_amount | frodo_balance | bilbo_balance | error                         |
     | $-30            | $50             | $0            | $0            | an error should be raised     |
     | $-30            | $20             | $-20          | $20           | an error should not be raised |
+
+  Scenario: Can't transfer between banks
+    Given a bank GondorBuildingSociety
+    Given account BoromirSavings in GondorBuildingSociety
+    When Gandhalf transfers $50 from FrodoSavings account to BoromirSavings account an error should be raised

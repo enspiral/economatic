@@ -17,13 +17,17 @@ CAPTURE_ACCOUNT = Transform /^([^ ]*) account$/ do |account_identifier|
   account
 end
 
-Given /^a bank$/ do
-  @bank = Bank.new
+Given /^a bank ([^ ]+)$/ do |bank_name|
+  @banks ||= {}
+  @banks[bank_name] = Bank.create!
 end
 
-Given /^account ([^ ]*)/ do |account_identifier|
+Given /^account ([^ ]*) in ([^ ]+)$/ do |account_identifier, bank_name|
+  bank = @banks[bank_name]
+  bank.should_not be_nil
+
   @accounts ||= {}
-  @accounts[account_identifier] = Account.create
+  @accounts[account_identifier] = Account.create(bank: bank)
 end
 
 Given /^a user ([^ ]*)$/ do |user_name|

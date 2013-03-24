@@ -8,7 +8,12 @@ ActiveRecord::Schema.define() do
   end
 
   create_table :accounts do |t|
+    t.integer :bank_id
     t.decimal :numeric_minimum_balance
+  end
+
+  create_table :banks do |t|
+
   end
 
   create_table :users do |t|

@@ -1,2 +1,2 @@
-class Bank
+class Bank < ActiveRecord::Base
 end

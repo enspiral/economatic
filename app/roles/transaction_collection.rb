@@ -6,8 +6,10 @@ module TransactionCollection
   include Role
 
   SUM_COLUMN = :numeric_amount
-  #expects account_id
-  def balance 
+
+  actor_dependency :id
+
+  def balance
     total = incoming_transactions.sum(SUM_COLUMN) - outgoing_transactions.sum(SUM_COLUMN)
     Money.new(total)
   end

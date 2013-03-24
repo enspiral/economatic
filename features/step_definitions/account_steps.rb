@@ -68,9 +68,7 @@ When /^(.*) an error should not be raised$/ do |original_step|
 end
 
 Then /^(#{CAPTURE_ACCOUNT}) has a balance of (#{CAPTURE_MONEY})$/ do |account, amount|
-  context = BalanceEnquiryContext.new(
-    account: account
-  )
+  context = BalanceEnquiryContext.new(account: account)
   context.call.should == amount
 end
 

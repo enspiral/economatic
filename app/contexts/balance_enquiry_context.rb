@@ -2,8 +2,7 @@ require 'transaction_collection'
 
 class BalanceEnquiryContext
   def initialize(actors)
-    @account = actors[:account]
-    @account.extend TransactionCollection
+    @account = TransactionCollection.cast_actor(actors[:account])
   end
 
   def call

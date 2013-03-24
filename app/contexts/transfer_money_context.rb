@@ -30,9 +30,11 @@ class TransferMoneyContext
   def call
     @time ||= Time.now
     role = @creator.role_for @source_account
-    raise NotAuthorizedToTransferMoney unless role.can_transfer_from?
     transaction = Transaction.new(transaction_arguments)
+
+    raise NotAuthorizedToTransferMoney unless role.can_transfer_from?
     raise AccountNotAbleToSendMoney unless @source_account.will_allow_transaction?(transaction)
+
     transaction.save!
   end
 end

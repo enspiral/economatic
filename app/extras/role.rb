@@ -24,7 +24,7 @@ module Role
           if @default_role
             @default_role.cast_actor(actor)
           else
-            raise CastingException
+            raise CastingException.new("Trying to cast #{actor.class.name} but it doesn't support method #{@method_name}")
           end
         end
       end

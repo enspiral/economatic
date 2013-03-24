@@ -1,7 +1,10 @@
+require 'role'
 require 'transaction'
 require 'money'
 
 module TransactionCollection
+  include Role
+
   SUM_COLUMN = :numeric_amount
   #expects account_id
   def balance 

@@ -59,6 +59,10 @@ When /^(.*) an error should be raised$/ do |original_step|
   }.to raise_error
 end
 
+When /^(.*) an error should not be raised$/ do |original_step|
+  step(original_step)
+end
+
 Then /^(#{CAPTURE_ACCOUNT}) has a balance of (#{CAPTURE_MONEY})$/ do |account, amount|
   context = BalanceEnquiryContext.new(
     account: account
@@ -87,6 +91,6 @@ end
 
 Given /^(#{CAPTURE_ACCOUNT}) has an overdraft limit of (#{CAPTURE_MONEY})$/ do |account, amount|
   account.minimum_balance = amount
-  account.save
+  account.save!
 end
 

@@ -42,9 +42,6 @@ describe MoneyAttribute do
     subject.numeric_amount.should == -20.0
   end
 
-  it "loads minimum balance" do
-  end
-
   it "sets sets money to nil" do
     subject.amount = Money.new(-20.0)
     subject.amount = nil
@@ -53,8 +50,15 @@ describe MoneyAttribute do
   end
 
   it "creates object successfully" do
-    record = TestRecord.create!(amount: 2.0)
+    record = TestRecord.create!(amount: Money.new(2.0))
     record.amount.should == Money.new(2.0)
+    record.numeric_amount.should == 2.0
+  end
+
+  it "instantiates object successfully" do
+    record = TestRecord.new(amount: Money.new(2.0))
+    record.amount.should == Money.new(2.0)
+    record.numeric_amount.should == 2.0
   end
 
 end

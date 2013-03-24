@@ -22,6 +22,7 @@ Feature:
     Then FrodoSavings account has a balance of $0
     Then BilboChecking account has a balance of $0
 
+  @wip
   Scenario: Overdraft limits
     Given FrodoSavings account has an overdraft limit of $-30
     When Gandhalf transfers $50 from FrodoSavings account to BilboChecking account an error should be raised

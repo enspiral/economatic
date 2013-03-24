@@ -1,12 +1,11 @@
 require 'transaction_collection'
-
-class BalanceEnquiryContext
+class TransactionListContext
   def initialize(actors)
     @account = actors[:account]
     @account.extend TransactionCollection
   end
 
   def call
-    @account.balance
+    @account.transactions
   end
 end

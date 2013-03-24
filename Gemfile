@@ -8,4 +8,5 @@ group :test do
   gem 'timecop'
   gem 'cucumber'
   gem 'rspec'
+  gem 'database_cleaner'
 end

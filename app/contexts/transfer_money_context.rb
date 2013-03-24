@@ -19,9 +19,9 @@ class TransferMoneyContext
 
   def transaction_arguments
     {
-      source_account: @source_account,
-      destination_account: @destination_account,
-      creator: @creator,
+      source_account_id: @source_account.id,
+      destination_account_id: @destination_account.id,
+      creator_id: @creator.id,
       amount: @amount,
       time: @time
     }

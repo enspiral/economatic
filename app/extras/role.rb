@@ -13,9 +13,26 @@ module Role
 
     private
 
+    class Dependency
+      def initialize(method_name, options)
+        @method_name = method_name
+        @default_role = options[:default_role]
+      end
+
+      def check(actor)
+        unless actor.respond_to?(@method_name)
+          if @default_role
+            @default_role.cast_actor(actor)
+          else
+            raise CastingException
+          end
+        end
+      end
+    end
+
     def check_depencies(actor)
-      dependencies.each do |method_name|
-        raise CastingException unless actor.respond_to?(method_name)
+      dependencies.each do |dependency|
+        dependency.check(actor)
       end
     end
 
@@ -23,8 +40,8 @@ module Role
       @dependencies ||= []
     end
 
-    def actor_dependency(method_name)
-      dependencies << method_name
+    def actor_dependency(method_name, options = {})
+      dependencies << Dependency.new(method_name, options)
     end
   end
 end

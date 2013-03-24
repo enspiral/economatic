@@ -10,15 +10,9 @@ class TransferMoneyContext
   def initialize(actors)
     @bank = actors[:bank]
 
-    #CastingCouch.cast(@source_account).as(TransactionSource)
-
-    #@source_account.cast_as(TransactionSource)
-
-    TransactionSource.cast_actor(@source_account)
-
-    @source_account = actors[:source_account].cast_as(TransactionSource)
+    @source_account = TransactionSource.cast_actor(actors[:source_account])
     @destination_account = actors[:destination_account]
-    @creator = actors[:creator].extend Authorisable
+    @creator = Authorisable.cast_actor(actors[:creator])
     @amount = actors[:amount]
     @time = actors[:time]
   end

@@ -7,6 +7,14 @@ class TransferMoneyContext
   class NotAuthorizedToTransferMoney < CannotTransferMoney; end
   class AccountNotAbleToSendMoney < CannotTransferMoney; end
 
+  # how about doing something like this?
+  # actor :source_account, role: TransactionSource
+  # actor :destination_account
+  # actor :creator, role: Authorisable
+  # actor :amount
+  # actor :time
+  # actor :bank
+
   def initialize(actors)
     @bank = actors[:bank]
 

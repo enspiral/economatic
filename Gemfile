@@ -1,4 +1,4 @@
-source "http://rubygems.rc"
+source "http://rubygems.org/"
 
 gem 'activerecord'
 gem 'sqlite3'

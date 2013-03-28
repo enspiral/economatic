@@ -1,11 +1,10 @@
+require 'context'
 require 'transaction_collection'
 
-class BalanceEnquiryContext
-  def initialize(actors)
-    @account = TransactionCollection.cast_actor(actors[:account])
-  end
+class BalanceEnquiryContext < Context
+  actor :account, role: TransactionCollection
 
   def call
-    @account.balance
+    account.balance
   end
 end

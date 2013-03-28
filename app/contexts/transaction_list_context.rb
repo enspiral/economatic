@@ -1,11 +1,10 @@
+require 'context'
 require 'transaction_collection'
-class TransactionListContext
-  def initialize(actors)
-    @account = actors[:account]
-    @account.extend TransactionCollection
-  end
+
+class TransactionListContext < Context
+  actor :account, role: TransactionCollection
 
   def call
-    @account.transactions
+    account.transactions
   end
 end

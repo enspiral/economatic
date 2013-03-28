@@ -2,7 +2,7 @@ require 'transaction'
 require 'authorisable'
 require 'transaction_source'
 
-class TransferMoneyContext
+class TransferMoneyContext < Context
   class CannotTransferMoney < Exception; end
   class NotAuthorizedToTransferMoney < CannotTransferMoney; end
   class AccountNotAbleToSendMoney < CannotTransferMoney; end

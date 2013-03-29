@@ -9,7 +9,7 @@ namespace :db do
     end
   end
   task :drop do
-    FileUtils.rm(File.join(ROOT_PATH, 'db/test.sqlite'))
+    FileUtils.rm_f(File.join(ROOT_PATH, 'db/test.sqlite'))
   end
   task :reset do
     task('db:drop').invoke

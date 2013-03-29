@@ -1,3 +1,4 @@
 rvm:
   - "2.0.0"
 script: "rake ci"
+before_script: "rake db:reset"

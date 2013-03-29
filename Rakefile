@@ -35,5 +35,5 @@ require 'coveralls/rake/task'
 Coveralls::RakeTask.new
 
 desc "Run cukes and specs"
-task :ci => [:spec, :features, 'coveralls:push'] do
+task :ci => [:spec, :features] do
 end

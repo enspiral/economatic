@@ -1,3 +1,6 @@
+require 'coveralls'
+Coveralls.wear!
+
 require_relative '../paths.rb'
 require 'boot'
 require 'database_cleaner'

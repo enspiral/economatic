@@ -5,4 +5,5 @@ require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 DatabaseCleaner.clean_with(:truncation)
 
-
+require 'coveralls'
+Coveralls.wear!

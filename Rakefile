@@ -16,3 +16,21 @@ namespace :db do
     task('db:schema:load').invoke
   end
 end
+
+require 'rspec/core/rake_task'
+
+desc "Run specs"
+RSpec::Core::RakeTask.new do |t|
+end
+
+require 'rubygems'
+require 'cucumber'
+require 'cucumber/rake/task'
+
+Cucumber::Rake::Task.new(:features) do |t|
+  t.cucumber_opts = "features --format pretty"
+end
+
+desc "Run cukes and specs"
+task :ci => [:spec, :features] do
+end

@@ -9,4 +9,5 @@ group :test do
   gem 'cucumber'
   gem 'rspec'
   gem 'database_cleaner'
+  gem 'coveralls', require: false
 end

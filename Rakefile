@@ -31,6 +31,11 @@ Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "features --format pretty"
 end
 
+task :coveralls do
+  require 'coveralls'
+  Coveralls.wear!
+end
+
 desc "Run cukes and specs"
-task :ci => [:spec, :features] do
+task :ci => [:coveralls, :spec, :features] do
 end

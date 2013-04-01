@@ -1,7 +1,7 @@
 module Scouts
   class DirectValue
     def actor_for_part(part, params)
-      params[part.name]
+      params[part.name.to_s]
     end
   end
 end

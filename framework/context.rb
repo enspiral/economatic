@@ -1,17 +1,6 @@
+require 'part'
+
 class Context
-  class Part
-    attr_accessor :name
-
-    def initialize(name, options = {})
-      @name = name
-      @role = options[:role]
-    end
-
-    def cast(actor)
-      @role ? @role.cast_actor(actor) : actor
-    end
-  end
-
   class << self
     def parts
       @actor_definitions ||= []

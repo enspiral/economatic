@@ -1,4 +1,4 @@
-require 'money'
+require 'money_attribute'
 require 'bank'
 
 class Account < ActiveRecord::Base

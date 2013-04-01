@@ -5,7 +5,7 @@ require 'money'
 module TransactionCollection
   include Role
 
-  SUM_COLUMN = :numeric_amount
+  SUM_COLUMN = :amount_cents
 
   actor_dependency :id
 

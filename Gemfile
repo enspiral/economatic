@@ -1,8 +1,9 @@
 source "http://rubygems.org/"
 
-gem 'activerecord'
-gem 'sqlite3'
+gem 'activerecord', require: false
+gem 'sqlite3', require: false
 gem 'rake'
+gem 'money', require: false
 
 group :test do
   gem 'timecop'

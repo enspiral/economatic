@@ -3,13 +3,13 @@ ActiveRecord::Schema.define() do
     t.integer :source_account_id
     t.integer :destination_account_id
     t.datetime :time
-    t.decimal :numeric_amount
+    t.integer :amount_cents
     t.integer :creator_id
   end
 
   create_table :accounts do |t|
     t.integer :bank_id
-    t.decimal :numeric_minimum_balance
+    t.decimal :minimum_balance_cents
   end
 
   create_table :banks do |t|

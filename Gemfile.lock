@@ -33,6 +33,8 @@ GEM
     i18n (0.6.4)
     json (1.7.7)
     mime-types (1.21)
+    money (5.1.1)
+      i18n (~> 0.6.0)
     multi_json (1.7.2)
     rake (10.0.3)
     rest-client (1.6.7)
@@ -62,6 +64,7 @@ DEPENDENCIES
   coveralls
   cucumber
   database_cleaner
+  money
   rake
   rspec
   sqlite3

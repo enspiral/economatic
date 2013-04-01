@@ -1,3 +1,4 @@
+require 'active_record'
 require 'money_attribute'
 require 'bank'
 

@@ -1,3 +1,5 @@
+require 'active_record'
+
 class AccountRole < ActiveRecord::Base
   attr_accessible :user_id, :account_id
 

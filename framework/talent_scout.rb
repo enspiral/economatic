@@ -24,7 +24,7 @@ class TalentScout
   end
 
   def scouts
-    [Scouts::DirectValue, Scouts::EntityFromRepository]
+    [Scouts::DirectValue, Scouts::EntityFromRepository].map(&:new)
   end
 
   def actor_for_part(part, params)
@@ -32,5 +32,6 @@ class TalentScout
       actor = scout.actor_for_part(part, params)
       return actor if actor
     end
+    nil
   end
 end

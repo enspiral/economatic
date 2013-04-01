@@ -2,18 +2,21 @@ require 'context'
 require 'transaction'
 require 'authorisable'
 require 'transaction_source'
+require 'account'
+require 'user'
+require 'bank'
 
 class TransferMoneyContext < Context
   class CannotTransferMoney < Exception; end
   class NotAuthorizedToTransferMoney < CannotTransferMoney; end
   class AccountNotAbleToSendMoney < CannotTransferMoney; end
 
-  actor :source_account, role: TransactionSource
-  actor :destination_account
-  actor :creator, role: Authorisable
+  actor :source_account, role: TransactionSource, repository: Account
+  actor :destination_account, repository: Account
+  actor :creator, role: Authorisable, repository: User
   actor :amount
   actor :time
-  actor :bank
+  actor :bank, repository: Bank
 
   def transaction_arguments
     {

@@ -5,6 +5,7 @@ require 'transaction_source'
 require 'account'
 require 'user'
 require 'bank'
+require 'money_composer'
 
 class TransferMoneyContext < Context
   class CannotTransferMoney < Exception; end

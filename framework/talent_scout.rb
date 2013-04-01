@@ -1,5 +1,7 @@
+require 'scouts/build_with_composer'
 require 'scouts/direct_value'
-require 'scouts/entity_from_respository'
+require 'scouts/entity_from_repository'
+
 
 # Finds the actors for a context. The name of this class
 # might be a bit creative since I felt the need to explain it.
@@ -24,7 +26,7 @@ class TalentScout
   end
 
   def scouts
-    [Scouts::DirectValue, Scouts::EntityFromRepository].map(&:new)
+    [Scouts::DirectValue, Scouts::EntityFromRepository, Scouts::BuildWithComposer].map(&:new)
   end
 
   def actor_for_part(part, params)

@@ -14,7 +14,7 @@ class TransferMoneyContext < Context
   actor :source_account, role: TransactionSource, repository: Account
   actor :destination_account, repository: Account
   actor :creator, role: Authorisable, repository: User
-  actor :amount
+  actor :amount, composer: MoneyComposer
   actor :time
   actor :bank, repository: Bank
 

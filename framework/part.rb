@@ -1,10 +1,12 @@
 class Part
-  attr_accessor :name, :repository
+  attr_accessor :name, :repository, :role, :composer
 
   def initialize(name, options = {})
     @name = name
-    @repository = options[:repository]
-    @role = options[:role]
+
+    options.each do |key, value|
+      self.send("#{key}=", value)
+    end
   end
 
   def cast(actor)

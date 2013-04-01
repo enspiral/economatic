@@ -1,14 +1,21 @@
+require 'scouts/can_construct_object'
+
 module Scouts
   class BuildWithComposer
-    def actor_for_part(part, params)
-      composer = part.composer
-      if composer
-        attributes_key = "#{part.name}_attributes"
-        attributes_value = params[attributes_key]
-        composer.compose(attributes_value) if attributes_value
-      else
-        nil
-      end
+    include CanConstructObject
+
+    private
+
+    def object_builder(part)
+      part.composer
+    end
+
+    def param_suffix
+      "attributes"
+    end
+
+    def build_method
+      :compose
     end
   end
 end

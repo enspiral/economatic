@@ -1,14 +1,21 @@
+require 'scouts/can_construct_object'
+
 module Scouts
   class EntityFromRepository
-    def actor_for_part(part, params)
-      repository = part.repository
-      if repository
-        id_param_key = "#{part.name}_id"
-        id_param_value = params[id_param_key]
-        repository.find(id_param_value) if id_param_value
-      else
-        nil
-      end
+    include CanConstructObject
+
+    private
+
+    def object_builder(part)
+      part.repository
+    end
+
+    def param_suffix
+      "id"
+    end
+
+    def build_method
+      :find
     end
   end
 end

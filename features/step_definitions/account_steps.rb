@@ -17,6 +17,10 @@ CAPTURE_ACCOUNT = Transform /^([^ ]*) account$/ do |account_identifier|
   account
 end
 
+CAPTURE_WITH_DESCRIPTION = Transform /^( ?with description "([^"]*)")?$/ do |unused, description|
+  description
+end
+
 Given /^a bank ([^ ]+)$/ do |bank_name|
   @banks ||= {}
   @banks[bank_name] = Bank.create!
@@ -44,15 +48,15 @@ Given /^a user ([^ ]*) who can not operate (#{CAPTURE_ACCOUNT})$/ do |user_name,
   step("a user #{user_name}")
 end
 
-
-When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPTURE_ACCOUNT})$/ do |user_name, amount, source_account, destination_account|
+When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION})$/ do |user_name, amount, source_account, destination_account, description|
   user = @users[user_name]
   context = TransferMoneyContext.new(
     bank: @bank,
     source_account: source_account,
     destination_account: destination_account,
     creator: user,
-    amount: amount
+    amount: amount,
+    description: description
   )
   context.call
 end
@@ -72,7 +76,7 @@ Then /^(#{CAPTURE_ACCOUNT}) has a balance of (#{CAPTURE_MONEY})$/ do |account, a
   context.call.should == amount
 end
 
-Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|from) (#{CAPTURE_ACCOUNT}) in the transaction log$/ do |target_account, amount, user_name, to_from, actor_account|
+Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|from) (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION}) in the transaction log$/ do |target_account, amount, user_name, to_from, actor_account, description|
   user = @users[user_name]
 
   context = TransactionListContext.new(
@@ -89,6 +93,8 @@ Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|
     last_transaction.source_account_id.should == actor_account.id
     last_transaction.destination_account_id.should == target_account.id
   end
+
+  last_transaction.description.should == description
 end
 
 Given /^(#{CAPTURE_ACCOUNT}) has an overdraft limit of (#{CAPTURE_MONEY})$/ do |account, amount|

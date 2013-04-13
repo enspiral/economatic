@@ -1,8 +1,6 @@
 require 'active_record'
 
 class AccountRole < ActiveRecord::Base
-  attr_accessible :user_id, :account_id
-
   abstract_class = true
 
   belongs_to :user

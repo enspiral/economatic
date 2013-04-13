@@ -11,6 +11,8 @@ namespace :db do
   task :drop do
     FileUtils.rm_f(File.join(ROOT_PATH, 'db/test.sqlite'))
   end
+
+  desc "rebuild the database from schema.rb"
   task :reset do
     task('db:drop').invoke
     task('db:schema:load').invoke

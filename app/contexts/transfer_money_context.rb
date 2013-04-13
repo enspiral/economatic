@@ -18,6 +18,7 @@ class TransferMoneyContext < Context
   actor :amount, composer: MoneyComposer
   actor :time
   actor :bank, repository: Bank
+  actor :description
 
   def transaction_arguments
     {
@@ -25,13 +26,15 @@ class TransferMoneyContext < Context
       destination_account_id: destination_account.id,
       creator_id: creator.id,
       amount: amount,
-      time: time || Time.now
+      time: time || Time.now,
+      description: description
     }
   end
 
   def call
     role = creator.role_for source_account
     transaction = Transaction.new(transaction_arguments)
+    puts transaction.description.inspect
 
     raise NotAuthorizedToTransferMoney unless role.can_transfer_from?
     raise AccountNotAbleToSendMoney unless source_account.will_allow_transaction?(transaction)

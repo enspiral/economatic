@@ -5,6 +5,7 @@ ActiveRecord::Schema.define() do
     t.datetime :time
     t.integer :amount_cents
     t.integer :creator_id
+    t.string :description
   end
 
   create_table :accounts do |t|

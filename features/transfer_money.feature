@@ -11,11 +11,11 @@ Feature:
     Given FrodoSavings account has an overdraft limit of $-100
 
   Scenario: Succesfully transfer money
-    When Gandhalf transfers $50 from FrodoSavings account to BilboChecking account
+    When Gandhalf transfers $50 from FrodoSavings account to BilboChecking account with description "birthday present"
     Then FrodoSavings account has a balance of $-50
     Then BilboChecking account has a balance of $50
-    Then FrodoSavings account has a $50 transaction by Gandhalf to BilboChecking account in the transaction log
-    Then BilboChecking account has a $50 transaction by Gandhalf from FrodoSavings account in the transaction log
+    Then FrodoSavings account has a $50 transaction by Gandhalf to BilboChecking account with description "birthday present" in the transaction log
+    Then BilboChecking account has a $50 transaction by Gandhalf from FrodoSavings account with description "birthday present" in the transaction log
 
   Scenario: Restrict access to accounts
     Given a user Gollum who can not operate FrodoSavings account

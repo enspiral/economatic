@@ -5,6 +5,6 @@ class BankBalanceEnquiryContext < Context
   actor :bank, role: BankOfAccounts, repository: Bank
 
   def call
-    bank.balance
+    -bank.external_accounts_balance
   end
 end

@@ -1,9 +1,9 @@
 require 'context'
-require 'transaction_collection'
+require 'account_transaction_collection'
 require 'account'
 
 class TransactionListContext < Context
-  actor :account, role: TransactionCollection, repository: Account
+  actor :account, role: AccountTransactionCollection, repository: Account
 
   def call
     account.transactions

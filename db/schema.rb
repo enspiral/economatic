@@ -11,10 +11,7 @@ ActiveRecord::Schema.define() do
   create_table :accounts do |t|
     t.integer :bank_id
     t.decimal :minimum_balance_cents
-  end
-
-  create_table :external_accounts do |t|
-    t.integer :bank_id
+    t.string :type, :length => 15, :default => 'Account'
   end
 
   create_table :banks do |t|

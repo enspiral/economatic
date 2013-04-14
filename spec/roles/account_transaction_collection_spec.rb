@@ -1,15 +1,15 @@
 require 'spec_helper'
-require 'transaction_collection'
+require 'account_transaction_collection'
 
-describe TransactionCollection do
+describe AccountTransactionCollection do
   let(:actor) {Object.new.tap {|a| a.stub!(:id => 1)}}
-  subject { actor.extend TransactionCollection }
+  let(:incoming_scope) {stub(:incoming_scope)}
+  let(:outgoing_scope) {stub(:outgoing_scope)}
+  subject { actor.extend AccountTransactionCollection }
 
-  describe 'balance' do
-    it 'returns incoming transactions - outgoing transactions' do
-      incoming_scope = stub(:incoming_scope)
+  describe '#balance' do
+    it 'returns incoming transactions minus outgoing transactions' do
       incoming_scope.stub(:sum).with(:amount_cents).and_return(30)
-      outgoing_scope = stub(:outgoing_scope)
       outgoing_scope.stub(:sum).with(:amount_cents).and_return(20)
 
       Transaction.stub(:where).with(source_account_id: subject.id).and_return(outgoing_scope)

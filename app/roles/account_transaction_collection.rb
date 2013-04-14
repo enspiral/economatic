@@ -2,7 +2,7 @@ require 'role'
 require 'transaction'
 require 'money'
 
-module TransactionCollection
+module AccountTransactionCollection
   include Role
 
   SUM_COLUMN = :amount_cents
@@ -19,6 +19,7 @@ module TransactionCollection
   end
 
   private
+
   def outgoing_transactions
     Transaction.where(source_account_id: id)
   end

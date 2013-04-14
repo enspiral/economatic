@@ -1,6 +1,5 @@
 require 'bank'
 require "account"
-require "external_account"
 require "user"
 require "account_role"
 

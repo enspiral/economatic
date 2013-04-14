@@ -1,12 +1,12 @@
 require 'role'
-require 'transaction_collection'
+require 'account_transaction_collection'
 
 module TransactionSource
   include Role
 
   actor_dependency :minimum_balance
   actor_dependency :bank
-  actor_dependency :balance, default_role: TransactionCollection
+  actor_dependency :balance, default_role: AccountTransactionCollection
 
   def will_allow_transaction?(transaction)
     minimum_balance_allows?(transaction) && accounts_in_same_bank?(transaction)

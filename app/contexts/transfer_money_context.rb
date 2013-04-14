@@ -32,7 +32,7 @@ class TransferMoneyContext < Context
   end
 
   def call
-    role = creator.role_for source_account
+    role = creator.role_for_account source_account
     transaction = Transaction.new(transaction_arguments)
     puts transaction.description.inspect
 

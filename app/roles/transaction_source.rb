@@ -25,5 +25,4 @@ module TransactionSource
       true
     end
   end
-
 end

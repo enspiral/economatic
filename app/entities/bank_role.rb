@@ -8,7 +8,7 @@ class BankRole < ActiveRecord::Base
 end
 
 class BankAdministratorRole < BankRole
-end
-
-class NullBankRole < BankRole
+  def can_transfer_from?
+    true
+  end
 end

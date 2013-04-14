@@ -8,8 +8,8 @@ require 'transfer_money_context'
 require 'balance_enquiry_context'
 require 'transaction_list_context'
 
-CAPTURE_MONEY = Transform /^(\$)(\-?\d+)$/ do |currency_symbol, amount|
-  Money.new(amount.to_f)
+CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
+  Money.new(amount.gsub(',', '').to_f)
 end
 
 CAPTURE_ACCOUNT = Transform /^([^ ]*) account$/ do |account_identifier|

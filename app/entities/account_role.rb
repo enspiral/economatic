@@ -12,7 +12,6 @@ class AccountRole < ActiveRecord::Base
 end
 
 class AccountHolderRole < AccountRole
-
   def can_transfer_from?
     true
   end

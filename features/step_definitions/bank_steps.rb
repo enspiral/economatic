@@ -1,4 +1,5 @@
 require 'bank_role'
+require 'bank_balance_enquiry_context'
 
 CAPTURE_BANK = Transform /^([^ ]*) bank/ do |identifier|
   bank = @banks[identifier]
@@ -17,4 +18,8 @@ end
 Given /^a user ([^ ]*) who can administer (#{CAPTURE_BANK})$/ do |user_name, bank|
   step("a user #{user_name}")
   BankAdministratorRole.create!(user_id: @user.id, bank_id: bank.id)
+end
+
+Then /^Total money in (#{CAPTURE_BANK}) is (#{CAPTURE_MONEY})$/ do |bank, expected_balance|
+  BankBalanceEnquiryContext.new(bank: bank).call.should == expected_balance
 end

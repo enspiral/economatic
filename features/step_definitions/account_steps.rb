@@ -5,7 +5,7 @@ require "user"
 require "account_role"
 
 require 'transfer_money_context'
-require 'balance_enquiry_context'
+require 'account_balance_enquiry_context'
 require 'transaction_list_context'
 
 CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
@@ -60,7 +60,7 @@ When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPT
 end
 
 Then /^(#{CAPTURE_ACCOUNT}) has a balance of (#{CAPTURE_MONEY})$/ do |account, amount|
-  context = BalanceEnquiryContext.new(account: account)
+  context = AccountBalanceEnquiryContext.new(account: account)
   context.call.should == amount
 end
 

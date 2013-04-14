@@ -1,5 +1,6 @@
 require 'bank'
 require "account"
+require "external_account"
 require "user"
 require "account_role"
 
@@ -21,17 +22,14 @@ CAPTURE_WITH_DESCRIPTION = Transform /^( ?with description "([^"]*)")?$/ do |unu
   description
 end
 
-Given /^a bank ([^ ]+)$/ do |bank_name|
-  @banks ||= {}
-  @banks[bank_name] = Bank.create!
-end
-
-Given /^account ([^ ]*) in ([^ ]+)$/ do |account_identifier, bank_name|
-  bank = @banks[bank_name]
+Given /^(external )?account ([^ ]*) in ([^ ]+)$/ do |is_external, account_identifier, bank_name|
+  bank = banks[bank_name]
   bank.should_not be_nil
 
+  klass = is_external ? ExternalAccount : Account
+
   @accounts ||= {}
-  @accounts[account_identifier] = Account.create(bank: bank)
+  @accounts[account_identifier] = klass.create(bank: bank)
 end
 
 Given /^a user ([^ ]*)$/ do |user_name|
@@ -59,16 +57,6 @@ When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPT
     description: description
   )
   context.call
-end
-
-When /^(.*) an error should be raised$/ do |original_step|
-  expect {
-    step(original_step)
-  }.to raise_error
-end
-
-When /^(.*) an error should not be raised$/ do |original_step|
-  step(original_step)
 end
 
 Then /^(#{CAPTURE_ACCOUNT}) has a balance of (#{CAPTURE_MONEY})$/ do |account, amount|

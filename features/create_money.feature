@@ -9,8 +9,9 @@ Feature: Can transfer money between bank and external sources
     Given external account PublicGrants in MI6
     Given external account FieldExpenses in MI6
     Given account Operations in MI6
-    Given account BondGoldCard in MI6 with an overdraft limit of $-10,000,000
-    Given a user M who can administer MI6
+    Given account BondGoldCard in MI6
+    Given BondGoldCard account has an overdraft limit of $-100
+    Given a user M who can administer MI6 bank
     Given a user Bond who can operate BondGoldCard account
 
   Scenario: Transfer money in from external account

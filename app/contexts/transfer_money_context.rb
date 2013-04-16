@@ -34,7 +34,13 @@ class TransferMoneyContext < Context
   def call
     role = creator.role_for_account source_account
     transaction = Transaction.new(transaction_arguments)
-    puts transaction.description.inspect
+
+    # argh, refactor this!
+    transaction.pending = true if destination_account.external?
+
+    # or maybe use this
+    #destination_account.set_transaction_destination(transaction)
+    #source_account.set_transaction_source(transaction)
 
     raise NotAuthorizedToTransferMoney unless role.can_transfer_from?
     raise AccountNotAbleToSendMoney unless source_account.will_allow_transaction?(transaction)

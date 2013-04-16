@@ -15,16 +15,24 @@ module AccountTransactionCollection
   end
 
   def transactions
-    Transaction.where("source_account_id = :account_id OR destination_account_id = :account_id", {account_id: id})
+    base_scope.where("source_account_id = :account_id OR destination_account_id = :account_id", {account_id: id})
   end
 
   private
 
   def outgoing_transactions
-    Transaction.where(source_account_id: id)
+    base_scope.where(source_account_id: id)
   end
 
   def incoming_transactions
-    Transaction.where(destination_account_id: id)
+    non_pending.where(destination_account_id: id)
+  end
+
+  def non_pending
+    base_scope.where(pending: false)
+  end
+
+  def base_scope
+    Transaction
   end
 end

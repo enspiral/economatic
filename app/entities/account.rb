@@ -7,7 +7,14 @@ class Account < ActiveRecord::Base
   money_attribute :minimum_balance
 
   belongs_to :bank
+
+  def external?
+    false
+  end
 end
 
 class ExternalAccount < Account
+  def external?
+    true
+  end
 end

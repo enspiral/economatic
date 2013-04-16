@@ -6,6 +6,7 @@ ActiveRecord::Schema.define() do
     t.integer :amount_cents
     t.integer :creator_id
     t.string :description
+    t.boolean :pending, :default => false
   end
 
   create_table :accounts do |t|

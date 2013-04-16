@@ -11,7 +11,7 @@ module AccountVariationCollection
   actor_dependency :variations
 
   def balance
-    Money.new(base_scope.sum(SUM_COLUMN))
+    Money.new(non_pending.sum(SUM_COLUMN))
   end
 
   private

@@ -19,7 +19,6 @@ Feature: Can transfer money between bank and external sources
     Then PublicGrants account has a balance of $-10,000,000
     Then Operations account has a balance of $10,000,000
 
-  @wip
   Scenario: Transfer money out to external account and it is held as pending
     When Bond transfers $800,000 from BondGoldCard account to FieldExpenses account with description "Ferrari"
     Then BondGoldCard account has a balance of $-800,000

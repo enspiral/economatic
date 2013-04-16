@@ -6,6 +6,6 @@ module TransactionDestination
   actor_dependency :id
 
   def increase_money!(amount, transaction)
-    Variation.create!(amount: amount, transaction: transaction, account: self)
+    Variation.create!(amount: amount, transaction: transaction, account: self, pending: external?)
   end
 end

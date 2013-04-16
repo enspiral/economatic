@@ -1,28 +1,29 @@
 require 'role'
-require 'account_transaction_collection'
+require 'account_variation_collection'
 
 module TransactionSource
   include Role
 
   actor_dependency :minimum_balance
   actor_dependency :bank
-  actor_dependency :balance, default_role: AccountTransactionCollection
+  actor_dependency :balance, default_role: AccountVariationCollection
+  actor_dependency :id
 
-  def will_allow_transaction?(transaction)
-    minimum_balance_allows?(transaction) && accounts_in_same_bank?(transaction)
+  def can_decrease_money?(amount)
+    if minimum_balance
+      balance - amount > minimum_balance
+    else
+      true
+    end
+  end
+
+  def decrease_money!(amount, transaction)
+    Variation.create!(amount: -amount, transaction: transaction, account: self)
   end
 
   private
 
   def accounts_in_same_bank?(transaction)
     self.bank == transaction.destination_account.bank
-  end
-
-  def minimum_balance_allows?(transaction)
-    if minimum_balance
-      balance - transaction.amount > minimum_balance
-    else
-      true
-    end
   end
 end

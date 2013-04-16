@@ -5,7 +5,6 @@ require "account_role"
 
 require 'transfer_money_context'
 require 'account_balance_enquiry_context'
-require 'transaction_list_context'
 
 CAPTURE_MONEY = Transform /^(\$)(\-?[\d\.\,]+)$/ do |currency_symbol, amount|
   Money.new(amount.gsub(',', '').to_f)
@@ -66,22 +65,29 @@ end
 Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|from) (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION}) in the transaction log$/ do |target_account, amount, user_name, to_from, actor_account, description|
   user = @users[user_name]
 
-  context = TransactionListContext.new(
-    account: target_account
-  )
-  last_transaction = context.call.last
+  # This is really complex logic to be in a test. If we need the app API to perform
+  # this for us, it should be in a context (and it should be way nicer code).
+  # If we don't need the API to perform this, why are we testing it?
 
-  last_transaction.creator_id.should == user.id
-  last_transaction.amount.should == amount
   if to_from == 'to'
-    last_transaction.source_account_id.should == target_account.id
-    last_transaction.destination_account_id.should == actor_account.id
+    source_account = target_account
+    destination_account = actor_account
   else
-    last_transaction.source_account_id.should == actor_account.id
-    last_transaction.destination_account_id.should == target_account.id
+    source_account = actor_account
+    destination_account = target_account
   end
 
-  last_transaction.description.should == description
+  source_variation_scope = source_account.variations.where(amount_cents: -amount.cents)
+  source_variation_scope.should exist
+
+  destination_variation_scope = destination_account.variations.where(amount_cents: amount.cents)
+  destination_variation_scope.should exist
+
+  valid_transaction_ids = source_variation_scope.map(&:transaction_id) & destination_variation_scope.map(&:transaction_id)
+
+  transaction_scope = Transaction.where(id: valid_transaction_ids, creator_id: user.id)
+  transaction_scope = transaction_scope.where(description: description) unless description.blank?
+  transaction_scope.should exist
 end
 
 Given /^(#{CAPTURE_ACCOUNT}) has an overdraft limit of (#{CAPTURE_MONEY})$/ do |account, amount|

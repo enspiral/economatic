@@ -2,6 +2,7 @@ require 'context'
 require 'transaction'
 require 'authorisable'
 require 'transaction_source'
+require 'transaction_destination'
 require 'account'
 require 'user'
 require 'bank'
@@ -10,10 +11,11 @@ require 'money_composer'
 class TransferMoneyContext < Context
   class CannotTransferMoney < Exception; end
   class NotAuthorizedToTransferMoney < CannotTransferMoney; end
-  class AccountNotAbleToSendMoney < CannotTransferMoney; end
+  class InsufficientFunds < CannotTransferMoney; end
+  class InvalidTransactionDestination < CannotTransferMoney; end
 
   actor :source_account, role: TransactionSource, repository: Account
-  actor :destination_account, repository: Account
+  actor :destination_account, role: TransactionDestination, repository: Account
   actor :creator, role: Authorisable, repository: User
   actor :amount, composer: MoneyComposer
   actor :time
@@ -22,10 +24,7 @@ class TransferMoneyContext < Context
 
   def transaction_arguments
     {
-      source_account_id: source_account.id,
-      destination_account_id: destination_account.id,
       creator_id: creator.id,
-      amount: amount,
       time: time || Time.now,
       description: description
     }
@@ -33,18 +32,14 @@ class TransferMoneyContext < Context
 
   def call
     role = creator.role_for_account source_account
-    transaction = Transaction.new(transaction_arguments)
-
-    # argh, refactor this!
-    transaction.pending = true if destination_account.external?
-
-    # or maybe use this
-    #destination_account.set_transaction_destination(transaction)
-    #source_account.set_transaction_source(transaction)
 
     raise NotAuthorizedToTransferMoney unless role.can_transfer_from?
-    raise AccountNotAbleToSendMoney unless source_account.will_allow_transaction?(transaction)
+    raise InsufficientFunds unless source_account.can_decrease_money?(amount)
+    raise InvalidTransactionDestination unless source_account.bank == destination_account.bank
 
-    transaction.save!
+    # TODO: Wrap this in a database transaction
+    transaction = Transaction.create!(transaction_arguments)
+    destination_account.increase_money!(amount, transaction)
+    source_account.decrease_money!(amount, transaction)
   end
 end

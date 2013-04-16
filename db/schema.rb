@@ -1,11 +1,12 @@
 ActiveRecord::Schema.define() do
   create_table :transactions do |t|
-    t.integer :source_account_id
-    t.integer :destination_account_id
     t.datetime :time
-    t.integer :amount_cents
     t.integer :creator_id
     t.string :description
+  end
+
+  create_table :variations do |t|
+    t.integer :account_id, :transaction_id, :amount_cents
     t.boolean :pending, :default => false
   end
 

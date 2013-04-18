@@ -24,7 +24,7 @@ Then /^Total money in (#{CAPTURE_BANK}) is (#{CAPTURE_MONEY})$/ do |bank, expect
   BankBalanceEnquiryContext.new(bank: bank).call.should == expected_balance
 end
 
-Then /^(#{CAPTURE_BANK}) has pending transactions totaling (#{CAPTURE_MONEY})$/ do |bank, amount|
+Then /^(#{CAPTURE_BANK}) has pending transfers totaling (#{CAPTURE_MONEY})$/ do |bank, amount|
   total_cents = Variation.joins(:account).where(:pending => true, "accounts.bank_id" => bank.id).sum(:amount_cents)
   total = Money.new(total_cents)
   total.should == amount

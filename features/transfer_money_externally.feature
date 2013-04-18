@@ -23,13 +23,13 @@ Feature: Can transfer money between bank and external sources
     When Bond transfers $800,000 from BondGoldCard account to FieldExpenses account with description "Ferrari"
     Then BondGoldCard account has a balance of $-800,000
     Then FieldExpenses account has a balance of $0
-    Then MI6 bank has pending transactions totaling $800,000
+    Then MI6 bank has pending transfers totaling $800,000
     Then Total money in MI6 bank is $0
 
-  Scenario: Pending outgoing transaction is approved by bank administrator and is applied
+  Scenario: Pending outgoing transfer is approved by bank administrator and is applied
     When Bond transfers $50,000 from BondGoldCard account to FieldExpenses account with description "Martinis"
-    When M approves transaction "Martinis" with description "Oh James"
+    When M approves transfer "Martinis" with description "Oh James"
     Then BondGoldCard account has a balance of $-50,000
     Then FieldExpenses account has a balance of $50,000
-    Then MI6 bank has pending transactions totaling $0
+    Then MI6 bank has pending transfers totaling $0
     Then Total money in MI6 bank is $-50000

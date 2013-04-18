@@ -1,7 +1,7 @@
 require 'role'
 require 'account_variation_collection'
 
-module TransactionSource
+module TransferSource
   include Role
 
   actor_dependency :minimum_balance
@@ -17,13 +17,13 @@ module TransactionSource
     end
   end
 
-  def decrease_money!(amount, transaction)
-    Variation.create!(amount: -amount, transaction: transaction, account: self)
+  def decrease_money!(amount, transfer)
+    Variation.create!(amount: -amount, transfer: transfer, account: self)
   end
 
   private
 
-  def accounts_in_same_bank?(transaction)
-    self.bank == transaction.destination_account.bank
+  def accounts_in_same_bank?(transfer)
+    self.bank == transfer.destination_account.bank
   end
 end

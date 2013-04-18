@@ -1,5 +1,5 @@
 require 'role'
-require 'transaction'
+require 'transfer'
 require 'money'
 
 module AccountVariationCollection

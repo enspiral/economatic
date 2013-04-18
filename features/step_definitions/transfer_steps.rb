@@ -1,4 +1,4 @@
-require 'approve_transaction_context'
+require 'approve_transfer_context'
 
 When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION})$/ do |user_name, amount, source_account, destination_account, description|
   user = @users[user_name]
@@ -13,7 +13,7 @@ When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPT
   context.call
 end
 
-Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|from) (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION}) in the transaction log$/ do |target_account, amount, user_name, to_from, actor_account, description|
+Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transfer by ([^ ]*) (to|from) (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION}) in the transfer log$/ do |target_account, amount, user_name, to_from, actor_account, description|
   user = @users[user_name]
 
   # This is really complex logic to be in a test. If we need the app API to perform
@@ -34,22 +34,22 @@ Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transaction by ([^ ]*) (to|
   destination_variation_scope = destination_account.variations.where(amount_cents: amount.cents)
   destination_variation_scope.should exist
 
-  valid_transaction_ids = source_variation_scope.map(&:transaction_id) & destination_variation_scope.map(&:transaction_id)
+  valid_transfer_ids = source_variation_scope.map(&:transfer_id) & destination_variation_scope.map(&:transfer_id)
 
-  transaction_scope = Transaction.where(id: valid_transaction_ids, creator_id: user.id)
-  transaction_scope = transaction_scope.where(description: description) unless description.blank?
-  transaction_scope.should exist
+  transfer_scope = Transfer.where(id: valid_transfer_ids, creator_id: user.id)
+  transfer_scope = transfer_scope.where(description: description) unless description.blank?
+  transfer_scope.should exist
 end
 
 
 
-When /^([^ ]*) approves transaction "(.*?)" with description "(.*?)"$/ do |user_name, transaction_description, approval_description|
+When /^([^ ]*) approves transfer "(.*?)" with description "(.*?)"$/ do |user_name, transfer_description, approval_description|
   user = @users[user_name]
-  transaction = Transaction.where(description: transaction_description).first
-  transaction.should_not be_nil
+  transfer = Transfer.where(description: transfer_description).first
+  transfer.should_not be_nil
 
-  ApproveTransactionContext.new(
-      transaction: transaction,
+  ApproveTransferContext.new(
+      transfer: transfer,
       description: approval_description,
       approver: user
   ).call

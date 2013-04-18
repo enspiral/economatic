@@ -1,6 +1,6 @@
 require 'role'
 
-module ApproveableTransaction
+module ApproveableTransfer
   include Role
 
   def approve_variations!

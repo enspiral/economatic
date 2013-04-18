@@ -1,12 +1,12 @@
 require 'role'
-require 'account_variation_collection'
+require 'account_transaction_collection'
 
 module TransferSource
   include Role
 
   actor_dependency :minimum_balance
   actor_dependency :bank
-  actor_dependency :balance, default_role: AccountVariationCollection
+  actor_dependency :balance, default_role: AccountTransactionCollection
   actor_dependency :id
 
   def can_decrease_money?(amount)
@@ -18,7 +18,7 @@ module TransferSource
   end
 
   def decrease_money!(amount, transfer)
-    Variation.create!(amount: -amount, transfer: transfer, account: self)
+    Transaction.create!(amount: -amount, transfer: transfer, account: self)
   end
 
   private

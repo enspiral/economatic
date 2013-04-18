@@ -28,13 +28,13 @@ Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transfer by ([^ ]*) (to|fro
     destination_account = target_account
   end
 
-  source_variation_scope = source_account.variations.where(amount_cents: -amount.cents)
-  source_variation_scope.should exist
+  source_transaction_scope = source_account.transactions.where(amount_cents: -amount.cents)
+  source_transaction_scope.should exist
 
-  destination_variation_scope = destination_account.variations.where(amount_cents: amount.cents)
-  destination_variation_scope.should exist
+  destination_transaction_scope = destination_account.transactions.where(amount_cents: amount.cents)
+  destination_transaction_scope.should exist
 
-  valid_transfer_ids = source_variation_scope.map(&:transfer_id) & destination_variation_scope.map(&:transfer_id)
+  valid_transfer_ids = source_transaction_scope.map(&:transfer_id) & destination_transaction_scope.map(&:transfer_id)
 
   transfer_scope = Transfer.where(id: valid_transfer_ids, creator_id: user.id)
   transfer_scope = transfer_scope.where(description: description) unless description.blank?

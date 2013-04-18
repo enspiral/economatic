@@ -2,7 +2,7 @@ require 'active_record'
 require 'account'
 require 'money'
 require 'user'
-require 'variation'
+require 'transaction'
 
 class Transfer < ActiveRecord::Base
   include MoneyAttribute
@@ -11,5 +11,5 @@ class Transfer < ActiveRecord::Base
   belongs_to :source_account, class_name: 'Account'
   belongs_to :destination_account, class_name: 'Account'
   belongs_to :creator, class_name: 'User'
-  has_many   :variations
+  has_many   :transactions
 end

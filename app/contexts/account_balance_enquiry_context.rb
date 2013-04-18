@@ -1,9 +1,9 @@
 require 'context'
-require 'account_variation_collection'
+require 'account_transaction_collection'
 require 'account'
 
 class AccountBalanceEnquiryContext < Context
-  actor :account, role: AccountVariationCollection, repository: Account
+  actor :account, role: AccountTransactionCollection, repository: Account
 
   def call
     account.balance

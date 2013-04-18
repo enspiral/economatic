@@ -2,13 +2,13 @@ require 'role'
 require 'transfer'
 require 'money'
 
-module AccountVariationCollection
+module AccountTransactionCollection
   include Role
 
   SUM_COLUMN = :amount_cents
 
   actor_dependency :id
-  actor_dependency :variations
+  actor_dependency :transactions
 
   def balance
     Money.new(non_pending.sum(SUM_COLUMN))
@@ -21,6 +21,6 @@ module AccountVariationCollection
   end
 
   def base_scope
-    variations
+    transactions
   end
 end

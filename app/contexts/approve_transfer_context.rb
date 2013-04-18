@@ -11,7 +11,7 @@ class ApproveTransferContext < Context
   def call
     # TODO: wrap in database Transaction
     TransferApproval.create!(approval_arguments)
-    transfer.approve_variations!
+    transfer.approve_transactions!
   end
 
   def approval_arguments

@@ -1,12 +1,12 @@
 require 'role'
-require 'account_variation_collection'
+require 'account_transaction_collection'
 
 module BankOfAccounts
   include Role
 
   def external_accounts_balance
     external_accounts.sum do |account|
-      AccountVariationCollection.cast_actor(account).balance
+      AccountTransactionCollection.cast_actor(account).balance
     end
   end
 

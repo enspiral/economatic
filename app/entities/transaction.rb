@@ -3,7 +3,7 @@ require 'account'
 require 'money'
 require 'transfer'
 
-class Variation < ActiveRecord::Base
+class Transaction < ActiveRecord::Base
   include MoneyAttribute
   money_attribute :amount
 

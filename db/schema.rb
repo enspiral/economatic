@@ -5,7 +5,7 @@ ActiveRecord::Schema.define() do
     t.string   :description
   end
 
-  create_table :variations do |t|
+  create_table :transactions do |t|
     t.integer :account_id, :transfer_id, :amount_cents
     t.boolean :pending, :default => false
   end

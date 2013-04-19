@@ -1,0 +1,4 @@
+desc "This this console interface"
+task :ci do
+  puts "no tests here yet"
+end

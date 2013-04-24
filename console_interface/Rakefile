@@ -1,4 +1,9 @@
-desc "This this console interface"
+desc "Test this console interface"
 task :ci do
   puts "no tests here yet"
+end
+
+desc "Setup this console interface"
+task :setup do
+  puts "nothing to setup"
 end

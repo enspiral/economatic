@@ -39,3 +39,8 @@ Coveralls::RakeTask.new
 desc "Run cukes and specs"
 task :ci => [:spec, :features] do
 end
+
+desc "Setup this app"
+task :setup do
+  task('db:reset').invoke
+end

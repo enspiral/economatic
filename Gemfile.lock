@@ -1,8 +1,17 @@
 PATH
+  remote: ./casting_couch
+  specs:
+    casting-couch (0.1.0)
+      coveralls
+      rake
+      rspec
+
+PATH
   remote: ./economatic_core
   specs:
     economatic-core (0.1.0)
       activerecord
+      casting-couch
       coveralls
       cucumber
       database_cleaner
@@ -74,5 +83,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  casting-couch!
   economatic-core!
   rake

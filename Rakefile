@@ -1,4 +1,4 @@
-APPS = %w(console_interface economatic_core)
+APPS = %w(economatic_core economatic_console)
 
 desc "Setup databases, gems and other requirements for all apps"
 task :setup_ci do

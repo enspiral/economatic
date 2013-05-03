@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = "casting-couch"
+  s.name = "talent-scout"
   s.version = '0.1.0'
   s.authors = ["Craig Ambrose", "Joshua Vial"]
   s.email = ["craig@enspiral.com", "joshua@enspiral.com"]

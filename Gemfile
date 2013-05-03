@@ -1,5 +1,5 @@
 source "http://rubygems.org"
 
 gem 'rake'
-gem 'casting-couch', path: './casting_couch'
+gem 'talent-scout', path: './talent_scout'
 gem 'economatic-core', path: './economatic_core'

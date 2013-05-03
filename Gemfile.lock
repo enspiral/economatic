@@ -1,17 +1,8 @@
 PATH
-  remote: ./casting_couch
-  specs:
-    casting-couch (0.1.0)
-      coveralls
-      rake
-      rspec
-
-PATH
   remote: ./economatic_core
   specs:
     economatic-core (0.1.0)
       activerecord
-      casting-couch
       coveralls
       cucumber
       database_cleaner
@@ -19,7 +10,16 @@ PATH
       rake
       rspec
       sqlite3
+      talent-scout
       timecop
+
+PATH
+  remote: ./talent_scout
+  specs:
+    talent-scout (0.1.0)
+      coveralls
+      rake
+      rspec
 
 GEM
   remote: http://rubygems.org/
@@ -83,6 +83,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  casting-couch!
   economatic-core!
   rake
+  talent-scout!

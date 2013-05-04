@@ -1,4 +1,4 @@
-APPS = %w(playhouse economatic_core economatic_console)
+APPS = %w(playhouse economatic_core economatic_console economatic_sinatra)
 
 desc "Setup databases, gems and other requirements for all apps"
 task :setup_ci do

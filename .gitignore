@@ -5,3 +5,5 @@ db/test.sqlite
 economatic_core/db/test.sqlite
 
 *.sqlite
+
+*.sqlite

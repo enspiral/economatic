@@ -13,4 +13,6 @@ Gem::Specification.new do |s|
   s.test_files = s.files.grep(%r{^(spec)/})
 
   s.required_ruby_version = '>= 1.9.2'
+
+  s.add_dependency 'commander', '~> 4.1.3'
 end

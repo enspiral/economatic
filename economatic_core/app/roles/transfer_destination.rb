@@ -1,7 +1,7 @@
-require 'role'
+require 'playhouse/role'
 
 module TransferDestination
-  include Role
+  include Playhouse::Role
 
   actor_dependency :id
 

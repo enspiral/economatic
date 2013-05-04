@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
 gem 'rake'
-gem 'talent-scout', path: './talent_scout'
+gem 'playhouse', path: './playhouse'
 gem 'economatic-core', path: './economatic_core'
 gem 'economatic-console', path: './economatic_console'

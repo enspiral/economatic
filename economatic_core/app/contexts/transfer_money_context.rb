@@ -1,4 +1,4 @@
-require 'context'
+require 'playhouse/context'
 require 'transfer'
 require 'authorisable'
 require 'transfer_source'
@@ -8,7 +8,7 @@ require 'user'
 require 'bank'
 require 'money_composer'
 
-class TransferMoneyContext < Context
+class TransferMoneyContext < Playhouse::Context
   class CannotTransferMoney < Exception; end
   class NotAuthorizedToTransferMoney < CannotTransferMoney; end
   class InsufficientFunds < CannotTransferMoney; end

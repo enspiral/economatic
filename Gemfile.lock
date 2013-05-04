@@ -13,16 +13,16 @@ PATH
       cucumber
       database_cleaner
       money
+      playhouse
       rake
       rspec
       sqlite3
-      talent-scout
       timecop
 
 PATH
-  remote: ./talent_scout
+  remote: ./playhouse
   specs:
-    talent-scout (0.1.0)
+    playhouse (0.1.0)
       coveralls
       rake
       rspec
@@ -94,5 +94,5 @@ PLATFORMS
 DEPENDENCIES
   economatic-console!
   economatic-core!
+  playhouse!
   rake
-  talent-scout!

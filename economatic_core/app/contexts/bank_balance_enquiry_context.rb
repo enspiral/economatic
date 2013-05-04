@@ -1,7 +1,7 @@
-require 'context'
+require 'playhouse/context'
 require 'bank_of_accounts'
 
-class BankBalanceEnquiryContext < Context
+class BankBalanceEnquiryContext < Playhouse::Context
   actor :bank, role: BankOfAccounts, repository: Bank
 
   def call

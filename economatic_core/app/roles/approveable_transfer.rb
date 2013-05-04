@@ -1,7 +1,7 @@
-require 'role'
+require 'playhouse/role'
 
 module ApproveableTransfer
-  include Role
+  include Playhouse::Role
 
   def approve_transactions!
     transactions.where(pending: true).each do |transaction|

@@ -1,9 +1,9 @@
 require 'account_role'
 require 'bank_role'
-require 'role'
+require 'playhouse/role'
 
 module Authorisable
-  include Role
+  include Playhouse::Role
 
   def role_for_account account
     account_role_for_account(account) ||

@@ -1,8 +1,8 @@
-require 'context'
+require 'playhouse/context'
 require 'approveable_transfer'
 require 'transfer_approval'
 
-class ApproveTransferContext < Context
+class ApproveTransferContext < Playhouse::Context
   actor :transfer, role: ApproveableTransfer, repository: Transfer
   actor :time
   actor :description

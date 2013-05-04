@@ -1,8 +1,8 @@
-require 'role'
+require 'playhouse/role'
 require 'account_transaction_collection'
 
 module TransferSource
-  include Role
+  include Playhouse::Role
 
   actor_dependency :minimum_balance
   actor_dependency :bank

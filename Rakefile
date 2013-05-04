@@ -1,4 +1,4 @@
-APPS = %w(talent_scout economatic_core economatic_console)
+APPS = %w(playhouse economatic_core economatic_console)
 
 desc "Setup databases, gems and other requirements for all apps"
 task :setup_ci do

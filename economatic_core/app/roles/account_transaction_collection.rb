@@ -1,9 +1,9 @@
-require 'role'
+require 'playhouse/role'
 require 'transfer'
 require 'money'
 
 module AccountTransactionCollection
-  include Role
+  include Playhouse::Role
 
   SUM_COLUMN = :amount_cents
 

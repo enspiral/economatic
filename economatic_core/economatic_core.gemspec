@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sqlite3'
   s.add_dependency 'rake'
   s.add_dependency 'money'
-  s.add_dependency 'talent-scout'
+  s.add_dependency 'playhouse'
 
   # These need to become development dependencies only
   s.add_dependency 'timecop'

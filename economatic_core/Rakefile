@@ -1,15 +1,14 @@
-require_relative 'paths'
-require 'boot'
+require 'economatic_core'
 require 'active_support/core_ext/object/inclusion'
 
 namespace :db do
   namespace :schema do
     task :load do
-      load File.join(ROOT_PATH, 'db/schema.rb')
+      load File.join(Economatic::ROOT_PATH, 'db/schema.rb')
     end
   end
   task :drop do
-    FileUtils.rm_f(File.join(ROOT_PATH, 'db/test.sqlite'))
+    FileUtils.rm_f(File.join(Economatic::ROOT_PATH, 'db/test.sqlite'))
   end
 
   desc "rebuild the database from schema.rb"

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'money_attribute'
+require 'support/money_attribute'
 require 'active_record'
 
 describe MoneyAttribute do

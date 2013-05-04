@@ -1,16 +1,15 @@
-require 'approve_transfer_context'
+require 'economatic/contexts/approve_transfer'
 
 When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION})$/ do |user_name, amount, source_account, destination_account, description|
   user = @users[user_name]
-  context = TransferMoneyContext.new(
+  context = Economatic::TransferMoney.new(
       bank: @bank,
       source_account: source_account,
       destination_account: destination_account,
       creator: user,
       amount: amount,
       description: description
-  )
-  context.call
+  ).call
 end
 
 Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transfer by ([^ ]*) (to|from) (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION}) in the transfer log$/ do |target_account, amount, user_name, to_from, actor_account, description|
@@ -36,19 +35,17 @@ Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transfer by ([^ ]*) (to|fro
 
   valid_transfer_ids = source_transaction_scope.map(&:transfer_id) & destination_transaction_scope.map(&:transfer_id)
 
-  transfer_scope = Transfer.where(id: valid_transfer_ids, creator_id: user.id)
+  transfer_scope = Economatic::Transfer.where(id: valid_transfer_ids, creator_id: user.id)
   transfer_scope = transfer_scope.where(description: description) unless description.blank?
   transfer_scope.should exist
 end
 
-
-
 When /^([^ ]*) approves transfer "(.*?)" with description "(.*?)"$/ do |user_name, transfer_description, approval_description|
   user = @users[user_name]
-  transfer = Transfer.where(description: transfer_description).first
+  transfer = Economatic::Transfer.where(description: transfer_description).first
   transfer.should_not be_nil
 
-  ApproveTransferContext.new(
+  Economatic::ApproveTransfer.new(
       transfer: transfer,
       description: approval_description,
       approver: user

@@ -1,5 +1,4 @@
-require_relative '../paths.rb'
-require 'boot'
+require 'economatic_core'
 require 'database_cleaner'
 
 DatabaseCleaner.strategy = :truncation

@@ -1,6 +1,8 @@
 require 'spec_helper'
-require 'account'
+require 'economatic/entities/account'
 
-describe Account do
-  subject { Account.new }
+module Economatic
+  describe Account do
+    subject { Account.new }
+  end
 end

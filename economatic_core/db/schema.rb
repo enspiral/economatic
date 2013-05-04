@@ -20,7 +20,7 @@ ActiveRecord::Schema.define() do
   create_table :accounts do |t|
     t.integer :bank_id
     t.decimal :minimum_balance_cents
-    t.string  :type, :length => 15, :default => 'Account'
+    t.string  :type, :length => 30, :default => 'Economatic::Account'
   end
 
   create_table :banks do |t|

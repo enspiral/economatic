@@ -1,9 +1,3 @@
 .idea
-db/test.sqlite
 /coverage
-
-economatic_core/db/test.sqlite
-
-*.sqlite
-
 *.sqlite

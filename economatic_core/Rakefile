@@ -41,6 +41,6 @@ task :ci => [:spec, :features] do
 end
 
 desc "Setup this app"
-task :setup do
+task :setup_ci do
   task('db:reset').invoke
 end

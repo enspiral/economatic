@@ -19,9 +19,8 @@ module Economatic
     actor :destination_account, role: TransferDestination, repository: Account
     actor :creator, role: Authorisable, repository: User
     actor :amount, composer: MoneyComposer
-    actor :time
-    actor :bank, repository: Bank
-    actor :description
+    actor :time, optional: true
+    actor :description, optional: true
 
     def transfer_arguments
       {

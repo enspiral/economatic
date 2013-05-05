@@ -5,8 +5,8 @@ require 'economatic/entities/transfer_approval'
 module Economatic
   class ApproveTransfer < Playhouse::Context
     actor :transfer, role: ApproveableTransfer, repository: Transfer
-    actor :time
-    actor :description
+    actor :time, optional: true
+    actor :description, optional: true
     actor :approver, repository: User
 
     def perform

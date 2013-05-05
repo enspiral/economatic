@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'commander', '~> 4.1.3'
   s.add_dependency 'economatic-core'
+  s.add_dependency 'terminal-table'
 end

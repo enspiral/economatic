@@ -23,6 +23,7 @@ PATH
   remote: ./playhouse
   specs:
     playhouse (0.1.0)
+      activesupport
       coveralls
       rake
       rspec

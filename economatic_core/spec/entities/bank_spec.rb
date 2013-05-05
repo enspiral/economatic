@@ -1,5 +1,7 @@
 require 'spec_helper'
-require 'bank'
+require 'economatic/entities/bank'
 
-describe Bank do
+module Economatic
+  describe Bank do
+  end
 end

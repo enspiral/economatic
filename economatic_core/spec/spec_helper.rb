@@ -3,8 +3,7 @@ if ENV['TRAVIS']
   Coveralls.wear!
 end
 
-require_relative '../paths.rb'
-require 'boot'
+require 'economatic_core'
 require 'database_cleaner'
 
 RSpec.configure do |config|

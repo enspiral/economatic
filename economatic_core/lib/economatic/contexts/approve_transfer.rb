@@ -9,7 +9,7 @@ module Economatic
     actor :description
     actor :approver, repository: User
 
-    def call
+    def perform
       # TODO: wrap in database Transaction
       TransferApproval.create!(approval_arguments)
       transfer.approve_transactions!

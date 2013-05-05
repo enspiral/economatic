@@ -5,7 +5,7 @@ module Economatic
   class BankBalanceEnquiry < Playhouse::Context
     actor :bank, role: BankOfAccounts, repository: Bank
 
-    def call
+    def perform
       -bank.external_accounts_balance
     end
   end

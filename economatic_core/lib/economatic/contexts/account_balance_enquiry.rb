@@ -6,7 +6,7 @@ module Economatic
   class AccountBalanceEnquiry < Playhouse::Context
     actor :account, role: AccountTransactionCollection, repository: Account
 
-    def call
+    def perform
       account.balance
     end
   end

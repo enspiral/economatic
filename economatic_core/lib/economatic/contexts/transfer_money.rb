@@ -31,7 +31,7 @@ module Economatic
       }
     end
 
-    def call
+    def perform
       role = creator.role_for_account source_account
 
       raise NotAuthorizedToTransferMoney unless role.can_transfer_from?

@@ -28,11 +28,6 @@ Given /^(external )?account ([^ ]*) in ([^ ]+)$/ do |is_external, account_identi
   @accounts[account_identifier] = klass.create(bank: bank)
 end
 
-Given /^a user ([^ ]*)$/ do |user_name|
-  @users ||= {}
-  @users[user_name] = @user = Economatic::User.create(name: user_name)
-end
-
 Given /^a user ([^ ]*) who can operate (#{CAPTURE_ACCOUNT})$/ do |user_name, account|
   step("a user #{user_name}")
   Economatic::AccountHolderRole.create!(user_id: @user.id, account_id: account.id)
@@ -52,3 +47,24 @@ Given /^(#{CAPTURE_ACCOUNT}) has an overdraft limit of (#{CAPTURE_MONEY})$/ do |
   account.save!
 end
 
+When /^([^ ]*) creates an account in ([^ ]*) with:$/ do |user_name, bank_name, table|
+  user = users[user_name]
+  bank = banks[bank_name]
+
+  options = table.rows_hash.symbolize_keys
+  options[:bank] = bank
+  Economatic::Accounts::Create.new(options).call
+end
+
+Then /^([^ ]*)'s account list for ([^ ]*) should be:$/ do |user_name, bank_name, table|
+  user = users[user_name]
+  bank = banks[bank_name]
+
+  result = Economatic::Accounts::List.new(bank: bank, viewer: user).call
+  expected = table.hashes
+
+  result.each_with_index do |row, result_index|
+    expected_row = expected[result_index]
+    row.attributes.should == expected_row
+  end
+end

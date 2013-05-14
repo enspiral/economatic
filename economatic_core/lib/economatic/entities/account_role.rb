@@ -10,10 +10,18 @@ module Economatic
     def can_transfer_from?
       false
     end
+
+    def can_update?
+      false
+    end
   end
 
   class AccountHolderRole < AccountRole
     def can_transfer_from?
+      true
+    end
+
+    def can_update?
       true
     end
   end

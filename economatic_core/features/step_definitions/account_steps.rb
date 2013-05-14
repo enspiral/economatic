@@ -60,7 +60,7 @@ Then /^([^ ]*)'s account list for ([^ ]*) should be:$/ do |user_name, bank_name,
   user = users[user_name]
   bank = banks[bank_name]
 
-  result = Economatic::Accounts::List.new(bank: bank, viewer: user).call
+  result = Economatic::Accounts::List.new(bank: bank, user: user).call
   expected = table.hashes
 
   result.each_with_index do |row, result_index|
@@ -76,6 +76,14 @@ When /^([^ ]*) updates (#{CAPTURE_ACCOUNT}) with:$/ do |user_name, account, tabl
   user = users[user_name]
 
   options = table.rows_hash.symbolize_keys
-  options[:account] = account
+  options.merge!(account: account, user: user)
+  Economatic::Accounts::Update.new(options).call
+end
+
+When /^([^ ]*) updates (#{CAPTURE_ACCOUNT})$/ do |user_name, account|
+  user = users[user_name]
+
+  options = {name: 'some default'}
+  options.merge!(account: account, user: user)
   Economatic::Accounts::Update.new(options).call
 end

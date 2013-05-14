@@ -3,7 +3,7 @@ require 'economatic/entities/transfer'
 require 'economatic/entities/account'
 require 'economatic/entities/user'
 require 'economatic/entities/bank'
-require 'economatic/roles/authorisable'
+require 'economatic/roles/account_authorizer'
 require 'economatic/roles/transfer_source'
 require 'economatic/roles/transfer_destination'
 require 'economatic/composers/money_composer'
@@ -17,7 +17,7 @@ module Economatic
 
     actor :source_account, role: TransferSource, repository: Account
     actor :destination_account, role: TransferDestination, repository: Account
-    actor :creator, role: Authorisable, repository: User
+    actor :creator, role: AccountAuthorizer, repository: User
     actor :amount, composer: MoneyComposer
     actor :time, optional: true
     actor :description, optional: true

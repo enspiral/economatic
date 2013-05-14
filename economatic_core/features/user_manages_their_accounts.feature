@@ -24,3 +24,7 @@ Feature: A user can manage their accounts
     Then Samwise's account list for ShireSavingsAndLoan should be:
       | name              | description         | balance |
       | My salary account | Where bilbo pays me | $0.0    |
+
+  Scenario: An unauthorized user can't update an account
+    Given a user Bilbo
+    When Bilbo updates SamwiseSalary account an error should be raised

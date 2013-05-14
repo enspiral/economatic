@@ -71,3 +71,11 @@ Then /^([^ ]*)'s account list for ([^ ]*) should be:$/ do |user_name, bank_name,
     end
   end
 end
+
+When /^([^ ]*) updates (#{CAPTURE_ACCOUNT}) with:$/ do |user_name, account, table|
+  user = users[user_name]
+
+  options = table.rows_hash.symbolize_keys
+  options[:account] = account
+  Economatic::Accounts::Update.new(options).call
+end

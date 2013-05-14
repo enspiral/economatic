@@ -9,12 +9,8 @@ module Economatic
       actor :name
       actor :description, optional: true
 
-      def creation_arguments
-        actors
-      end
-
       def perform
-        Account.create!(creation_arguments)
+        Account.create!(actors)
       end
     end
   end

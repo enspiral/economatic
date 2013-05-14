@@ -1,21 +1,21 @@
 require 'economatic/entities/bank'
 require 'economatic/entities/user'
+require 'economatic/roles/account_accessor'
 
 module Economatic
   module Accounts
     class List < Playhouse::Context
       actor :bank, repository: Bank
-      actor :viewer, repository: User
+      actor :viewer, repository: User, role: AccountAccessor
 
       def perform
-        # TODO: Filter this by viewer
         AccountTransactionCollection.cast_all accounts_scope
       end
 
       private
 
         def accounts_scope
-          Account.where(bank_id: bank.id).readonly
+          viewer.filter_accounts_by_viewable(bank.accounts).readonly
         end
     end
   end

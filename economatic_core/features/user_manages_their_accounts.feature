@@ -7,7 +7,6 @@ Feature: A user can manage their accounts
     Given a bank ShireSavingsAndLoan
     Given account SamwiseSalary in ShireSavingsAndLoan
 
-  @wip
   Scenario: Creating an account
     Given a user Bilbo
     When Bilbo creates an account in ShireSavingsAndLoan with:

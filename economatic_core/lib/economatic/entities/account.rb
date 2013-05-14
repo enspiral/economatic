@@ -10,6 +10,7 @@ module Economatic
 
     belongs_to :bank
     has_many :transactions
+    has_many :account_roles
 
     def external?
       false

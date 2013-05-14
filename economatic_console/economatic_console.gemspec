@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
 
-  s.add_dependency 'commander', '~> 4.1.3'
+  s.add_dependency 'thor'
   s.add_dependency 'economatic'
   s.add_dependency 'terminal-table'
 end

@@ -26,6 +26,7 @@ ActiveRecord::Schema.define() do
   end
 
   create_table :banks do |t|
+    t.string :name
   end
 
   create_table :users do |t|

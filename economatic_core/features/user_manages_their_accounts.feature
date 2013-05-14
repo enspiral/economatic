@@ -5,6 +5,7 @@ Feature: A user can manage their accounts
 
   Background:
     Given a bank ShireSavingsAndLoan
+    Given account SamwiseSalary in ShireSavingsAndLoan
 
   @wip
   Scenario: Creating an account

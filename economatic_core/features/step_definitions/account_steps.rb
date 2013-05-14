@@ -25,7 +25,7 @@ Given /^(external )?account ([^ ]*) in ([^ ]+)$/ do |is_external, account_identi
   klass = is_external ? Economatic::ExternalAccount : Economatic::Account
 
   @accounts ||= {}
-  @accounts[account_identifier] = klass.create(bank: bank)
+  @accounts[account_identifier] = klass.create(bank: bank, name: account_identifier)
 end
 
 Given /^a user ([^ ]*) who can operate (#{CAPTURE_ACCOUNT})$/ do |user_name, account|
@@ -65,6 +65,9 @@ Then /^([^ ]*)'s account list for ([^ ]*) should be:$/ do |user_name, bank_name,
 
   result.each_with_index do |row, result_index|
     expected_row = expected[result_index]
-    row.attributes.should == expected_row
+
+    expected_row.each do |key, value|
+      row.send(key).should == value
+    end
   end
 end

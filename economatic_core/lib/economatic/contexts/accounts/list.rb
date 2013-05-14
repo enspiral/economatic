@@ -15,7 +15,7 @@ module Economatic
       private
 
         def accounts_scope
-          Account.where(bank_id: bank.id)
+          Account.where(bank_id: bank.id).readonly
         end
     end
   end

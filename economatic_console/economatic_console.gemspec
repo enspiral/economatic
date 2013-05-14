@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.email = ["craig@enspiral.com", "joshua@enspiral.com"]
   s.homepage = "https://github.com/enspiral/economatic"
   s.summary = "A console interface to economatic"
-  s.description = "For more details, see economatic-core"
+  s.description = "For more details, see economatic"
 
   s.require_paths = %w(lib)
 
@@ -15,6 +15,6 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.2'
 
   s.add_dependency 'commander', '~> 4.1.3'
-  s.add_dependency 'economatic-core'
+  s.add_dependency 'economatic'
   s.add_dependency 'terminal-table'
 end

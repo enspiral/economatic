@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.email = ["craig@enspiral.com", "joshua@enspiral.com"]
   s.homepage = "https://github.com/enspiral/economatic"
   s.summary = "A sinatra interface to economatic"
-  s.description = "For more details, see economatic-core"
+  s.description = "For more details, see economatic"
 
   s.require_paths = %w(lib)
 

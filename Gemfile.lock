@@ -1,15 +1,7 @@
 PATH
-  remote: ./economatic_console
+  remote: ./economatic
   specs:
-    economatic-console (0.1.0)
-      commander (~> 4.1.3)
-      economatic-core
-      terminal-table
-
-PATH
-  remote: ./economatic_core
-  specs:
-    economatic-core (0.1.0)
+    economatic (0.1.0)
       activerecord
       coveralls
       cucumber
@@ -20,6 +12,14 @@ PATH
       rspec
       sqlite3
       timecop
+
+PATH
+  remote: ./economatic_console
+  specs:
+    economatic-console (0.1.0)
+      commander (~> 4.1.3)
+      economatic
+      terminal-table
 
 PATH
   remote: ./economatic_sinatra
@@ -131,8 +131,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  economatic!
   economatic-console!
-  economatic-core!
   economatic-sinatra!
   playhouse!
   rake

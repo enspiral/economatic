@@ -10,5 +10,6 @@ module Economatic
     context TransferMoney
     context Accounts::Create
     context Accounts::List
+    context Accounts::Update
   end
 end

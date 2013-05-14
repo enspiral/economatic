@@ -1,3 +1,4 @@
+require 'playhouse/context'
 require 'economatic/entities/bank'
 require 'economatic/entities/user'
 require 'economatic/roles/account_authorizer'

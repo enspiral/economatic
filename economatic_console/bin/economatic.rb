@@ -1,18 +1,9 @@
 #!/usr/bin/env ruby
 
-require 'thor'
 require 'economatic_core'
-require 'playhouse/console/command_builder'
-
-class EconomaticConsole < Thor
-end
+require 'playhouse/console/api_builder'
 
 api = Economatic::API.new
 
-command_builder = Playhouse::Console::CommandBuilder.new(EconomaticConsole, api)
-
-api.commands.each do |command|
-  command_builder.build_command(command)
-end
-
+EconomaticConsole = Playhouse::Console::ApiBuilder.build_console_api(api)
 EconomaticConsole.start(ARGV)

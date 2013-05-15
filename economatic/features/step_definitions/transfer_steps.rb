@@ -2,13 +2,13 @@ require 'economatic/contexts/approve_transfer'
 
 When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION})$/ do |user_name, amount, source_account, destination_account, description|
   user = @users[user_name]
-  context = Economatic::TransferMoney.new(
-      source_account: source_account,
-      destination_account: destination_account,
-      creator: user,
-      amount: amount,
-      description: description
-  ).call
+  api.transfer_money(
+    source_account: source_account,
+    destination_account: destination_account,
+    creator: user,
+    amount: amount,
+    description: description
+  )
 end
 
 Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transfer by ([^ ]*) (to|from) (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION}) in the transfer log$/ do |target_account, amount, user_name, to_from, actor_account, description|
@@ -44,9 +44,9 @@ When /^([^ ]*) approves transfer "(.*?)" with description "(.*?)"$/ do |user_nam
   transfer = Economatic::Transfer.where(description: transfer_description).first
   transfer.should_not be_nil
 
-  Economatic::ApproveTransfer.new(
-      transfer: transfer,
-      description: approval_description,
-      approver: user
-  ).call
+  api.approve_transfer(
+    transfer: transfer,
+    description: approval_description,
+    approver: user
+  )
 end

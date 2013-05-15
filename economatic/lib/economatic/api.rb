@@ -8,6 +8,8 @@ module Economatic
     context ApproveTransfer
     context BankBalanceEnquiry
     context TransferMoney
+
+    # TODO: Need a way of grouping these in the API
     context Accounts::Create
     context Accounts::List
     context Accounts::Update

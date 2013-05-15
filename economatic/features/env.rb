@@ -8,3 +8,7 @@ if ENV['TRAVIS']
   require 'coveralls'
   Coveralls.wear!
 end
+
+def api
+  @api ||= Economatic::API.new
+end

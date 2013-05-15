@@ -38,8 +38,7 @@ Given /^a user ([^ ]*) who can not operate (#{CAPTURE_ACCOUNT})$/ do |user_name,
 end
 
 Then /^(#{CAPTURE_ACCOUNT}) has a balance of (#{CAPTURE_MONEY})$/ do |account, amount|
-  context = Economatic::AccountBalanceEnquiry.new(account: account)
-  context.call.should == amount
+  api.account_balance_enquiry(account: account).should == amount
 end
 
 Given /^(#{CAPTURE_ACCOUNT}) has an overdraft limit of (#{CAPTURE_MONEY})$/ do |account, amount|
@@ -53,14 +52,14 @@ When /^([^ ]*) creates an account in ([^ ]*) with:$/ do |user_name, bank_name, t
 
   options = table.rows_hash.symbolize_keys
   options[:bank] = bank
-  Economatic::Accounts::Create.new(options).call
+  api.create_accounts(options)
 end
 
 Then /^([^ ]*)'s account list for ([^ ]*) should be:$/ do |user_name, bank_name, table|
   user = users[user_name]
   bank = banks[bank_name]
 
-  result = Economatic::Accounts::List.new(bank: bank, user: user).call
+  result = api.list_accounts(bank: bank, user: user)
   expected = table.hashes
 
   result.each_with_index do |row, result_index|
@@ -77,7 +76,7 @@ When /^([^ ]*) updates (#{CAPTURE_ACCOUNT}) with:$/ do |user_name, account, tabl
 
   options = table.rows_hash.symbolize_keys
   options.merge!(account: account, user: user)
-  Economatic::Accounts::Update.new(options).call
+  api.update_accounts(options)
 end
 
 When /^([^ ]*) updates (#{CAPTURE_ACCOUNT})$/ do |user_name, account|
@@ -85,5 +84,5 @@ When /^([^ ]*) updates (#{CAPTURE_ACCOUNT})$/ do |user_name, account|
 
   options = {name: 'some default'}
   options.merge!(account: account, user: user)
-  Economatic::Accounts::Update.new(options).call
+  api.update_accounts(options)
 end

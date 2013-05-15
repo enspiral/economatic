@@ -1,9 +1,9 @@
 require 'playhouse/support/files'
-require 'playhouse/api'
+require 'playhouse/play'
 require_all File.dirname(__FILE__), 'contexts/**/*.rb'
 
 module Economatic
-  class API < Playhouse::API
+  class API < Playhouse::Play
     context AccountBalanceEnquiry
     context ApproveTransfer
     context BankBalanceEnquiry

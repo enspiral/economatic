@@ -4,7 +4,9 @@ require 'ostruct'
 
 describe Playhouse::Console::CommandBuilder do
   let(:api) { MockApi.new }
-  subject { Playhouse::Console::CommandBuilder.new(api) }
+  let(:play) { mock(:play) }
+  let(:repos) { mock(:repository) }
+  subject { Playhouse::Console::CommandBuilder.new(api, play) }
 
   class MockApi < OpenStruct
     def desc(name, description)
@@ -31,7 +33,7 @@ describe Playhouse::Console::CommandBuilder do
     end
 
     def mock_part(options = {})
-      defaults = {name: 'star_name', required: false}
+      defaults = {name: 'star_name', required: false, repository: nil}
       mock(:part, defaults.merge(options))
     end
 
@@ -48,6 +50,11 @@ describe Playhouse::Console::CommandBuilder do
     it "marks option as required if part is required" do
       subject.build_command(mock_context(parts: [mock_part(required: true)]))
       api.added_methods['destroy_planet']['star_name'][:required].should be_true
+    end
+
+    it "adds 'id' suffix to option with a repository" do
+      subject.build_command(mock_context(parts: [mock_part(repository: repos)]))
+      api.added_methods['destroy_planet'].keys.should == ['star_name_id']
     end
   end
 end

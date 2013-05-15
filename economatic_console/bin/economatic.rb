@@ -9,7 +9,7 @@ end
 
 api = Economatic::API.new
 
-command_builder = Playhouse::Console::CommandBuilder.new(EconomaticConsole)
+command_builder = Playhouse::Console::CommandBuilder.new(EconomaticConsole, api)
 
 api.commands.each do |command|
   command_builder.build_command(command)

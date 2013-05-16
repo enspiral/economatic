@@ -29,7 +29,8 @@ module Playhouse
         def defined_command_handler(command)
           play = @playhouse_api
           @console_api.send :define_method, command.method_name do
-            play.send(command.method_name, options)
+            result = play.send(command.method_name, options)
+            puts result.inspect
           end
         end
     end

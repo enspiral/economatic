@@ -1,0 +1,6 @@
+test:
+  database: db/test.sqlite
+  adapter: sqlite3
+test:
+  database: db/development.sqlite
+  adapter: sqlite3

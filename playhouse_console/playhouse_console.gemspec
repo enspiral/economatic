@@ -1,11 +1,11 @@
 Gem::Specification.new do |s|
-  s.name = "economatic-console"
+  s.name = "playhouse-console"
   s.version = '0.1.0'
   s.authors = ["Craig Ambrose", "Joshua Vial"]
   s.email = ["craig@enspiral.com", "joshua@enspiral.com"]
   s.homepage = "https://github.com/enspiral/economatic"
-  s.summary = "A console interface to economatic"
-  s.description = "For more details, see economatic"
+  s.summary = "A console delivery layer for playhouse"
+  s.description = "Based on Thor"
 
   s.require_paths = %w(lib)
 
@@ -14,6 +14,6 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
 
-  s.add_dependency 'economatic'
-  s.add_dependency 'playhouse-console'
+  s.add_dependency 'thor'
+  s.add_dependency 'playhouse'
 end

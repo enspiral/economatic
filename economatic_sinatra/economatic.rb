@@ -8,7 +8,6 @@ theatre.stage do
   play = Economatic::API.new
 
   play.commands.each do |command|
-    puts command.method_name
     get "/#{command.method_name}" do
       command.methods.inspect
     end

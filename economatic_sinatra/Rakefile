@@ -1,16 +1,14 @@
-desc "Setup sinatra interface for CI"
+require 'rspec/core/rake_task'
+
+desc "Run specs"
+RSpec::Core::RakeTask.new do |t|
+end
+
+desc "Setup this console interface for CI"
 task :setup_ci do
   puts "nothing to setup"
 end
 
-require 'rubygems'
-require 'cucumber'
-require 'cucumber/rake/task'
-
-Cucumber::Rake::Task.new(:features) do |t|
-  t.cucumber_opts = "features --format pretty -t ~@wip"
-end
-
-desc "Run cukes"
-task :ci => [:features] do
+desc "Test this console interface"
+task :ci => [:spec] do
 end

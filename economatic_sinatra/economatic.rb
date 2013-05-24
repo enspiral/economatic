@@ -1,5 +1,7 @@
-require 'sinatra'
+require 'sinatra/base'
 
-get '/' do
-  'Hello World'
+class EconomaticWeb < Sinatra::Base
+  get '/' do
+    'Hello World'
+  end
 end

@@ -16,9 +16,4 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'sinatra'
   s.add_dependency 'thin'
-
-  #dev
-  s.add_dependency 'cucumber'
-  s.add_dependency 'capybara'
-  s.add_dependency 'rspec'
 end

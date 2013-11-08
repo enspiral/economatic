@@ -1,7 +1,6 @@
 require 'sinatra/base'
+require 'playhouse/sinatra'
 
-class PlayhouseWeb < Sinatra::Base
-  get '/' do
-    'Hello World'
-  end
+class PlayhouseSinatra < Sinatra::Base
+  register Playhouse::Sinatra
 end

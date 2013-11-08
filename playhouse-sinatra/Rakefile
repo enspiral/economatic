@@ -12,5 +12,7 @@ Cucumber::Rake::Task.new(:features) do |t|
 end
 
 desc "Run cukes"
-task :ci => [:features] do
+  task :ci => [:features] do
 end
+
+task :default => [:ci]

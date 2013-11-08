@@ -6,7 +6,7 @@ require "capybara"
 require "capybara/cucumber"
 require "rspec"
 
-Capybara.app = PlayhouseWeb
+Capybara.app = PlayhouseSinatra
 
 class PlayhouseWebWorld
   include Capybara::DSL

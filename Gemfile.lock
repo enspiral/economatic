@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/enspiral/playhouse-console.git
+  revision: a3cef388a66a59f58cc79ff5ed422d582f561271
+  specs:
+    playhouse-console (0.1.0)
+      playhouse
+      thor
+
+GIT
   remote: git://github.com/enspiral/playhouse.git
   revision: ed948f8a84898d55a6eb9a944e760ff091b46356
   specs:
@@ -40,13 +48,6 @@ PATH
       rspec
       sinatra
       thin
-
-PATH
-  remote: ./playhouse_console
-  specs:
-    playhouse-console (0.1.0)
-      playhouse
-      thor
 
 GEM
   remote: http://rubygems.org/

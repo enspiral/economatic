@@ -13,5 +13,10 @@ module Economatic
     context Accounts::Create
     context Accounts::List
     context Accounts::Update
+
+    def self.name
+      'economatic'
+    end
+
   end
 end

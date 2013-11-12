@@ -1,7 +1,8 @@
 require 'sinatra/base'
+require 'playhouse/sinatra'
+require 'economatic/api'
 
 class EconomaticWeb < Sinatra::Base
-  get '/' do
-    'Hello World'
-  end
+  register Playhouse::Sinatra
+  add_play Economatic::API
 end

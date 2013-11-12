@@ -13,3 +13,5 @@ task :ci => :setup_ci do
     sh %{cd #{app}; bundle exec rake ci}
   end
 end
+
+task default: :ci

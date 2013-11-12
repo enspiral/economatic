@@ -1,4 +1,4 @@
-APPS = %w(economatic economatic_console economatic_sinatra playhouse-sinatra) # economatic_sinatra
+APPS = %w(economatic economatic_sinatra playhouse-sinatra) # economatic_sinatra
 
 desc "Setup databases, gems and other requirements for all apps"
 task :setup_ci do

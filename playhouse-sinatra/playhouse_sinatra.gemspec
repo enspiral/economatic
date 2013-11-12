@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 1.9.2'
 
+  s.add_dependency 'playhouse'
   s.add_dependency 'sinatra'
   s.add_dependency 'thin'
 end

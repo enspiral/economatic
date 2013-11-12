@@ -1,3 +1,4 @@
+gem 'playhouse', git: 'git://github.com/enspiral/playhouse.git'
 gem 'playhouse-sinatra', path: '.'
 gem 'cucumber'
 gem 'capybara'

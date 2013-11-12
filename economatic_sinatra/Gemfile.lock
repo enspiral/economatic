@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/enspiral/playhouse-sinatra.git
+  revision: 45fe08e4ebd5774c5cda006fa69ba79082ae11b9
+  specs:
+    playhouse-sinatra (0.1.0)
+      playhouse
+      sinatra
+      thin
+
+GIT
   remote: git://github.com/enspiral/playhouse.git
   revision: 28f0aea15529b6d89e30bc1a4cf865c21494b381
   specs:
@@ -13,14 +22,6 @@ PATH
     economatic-sinatra (0.1.0)
       economatic
       playhouse-sinatra
-
-PATH
-  remote: ../../playhouse/sinatra
-  specs:
-    playhouse-sinatra (0.1.0)
-      playhouse
-      sinatra
-      thin
 
 PATH
   remote: ../economatic

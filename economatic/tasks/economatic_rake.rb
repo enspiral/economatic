@@ -12,7 +12,7 @@ namespace :db do
     end
   end
   task :drop => :environment do
-    FileUtils.rm_f(File.join(Economatic::ROOT_PATH, 'db/test.sqlite'))
+    FileUtils.rm_f(File.join(@root_dir, 'db/test.sqlite'))
   end
 
   desc "rebuild the database from schema.rb"

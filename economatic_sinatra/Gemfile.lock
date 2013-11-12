@@ -11,7 +11,16 @@ PATH
   remote: .
   specs:
     economatic-sinatra (0.1.0)
+      economatic
       playhouse-sinatra
+
+PATH
+  remote: ../../playhouse/sinatra
+  specs:
+    playhouse-sinatra (0.1.0)
+      playhouse
+      sinatra
+      thin
 
 PATH
   remote: ../economatic
@@ -28,14 +37,6 @@ PATH
       seed-fu
       sqlite3
       timecop
-
-PATH
-  remote: ../playhouse-sinatra
-  specs:
-    playhouse-sinatra (0.1.0)
-      playhouse
-      sinatra
-      thin
 
 GEM
   remote: http://rubygems.org/

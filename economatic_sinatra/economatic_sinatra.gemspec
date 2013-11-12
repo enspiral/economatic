@@ -15,4 +15,5 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 1.9.2'
 
   s.add_dependency 'playhouse-sinatra'
+  s.add_dependency 'economatic'
 end

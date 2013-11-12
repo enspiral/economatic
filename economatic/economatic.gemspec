@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.summary = "A banking backend"
   s.description = "Banks with accounts and transactions"
 
-  s.require_paths = %w(lib)
+  s.require_paths = %w(lib db)
 
   s.files = `git ls-files`.split($/)
   s.test_files = s.files.grep(%r{^(spec)/})

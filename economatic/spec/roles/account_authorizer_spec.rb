@@ -5,9 +5,9 @@ module Economatic
   describe AccountAuthorizer do
     include UsesDatabase
 
-    let(:actor) {Object.new.tap {|a| a.stub!(:id => 2)}}
-    let(:account) {mock(:account, id: 1, bank_id: 2)}
-    let(:bank) {mock(:bank, id: 2)}
+    let(:actor) {Object.new.tap {|a| a.stub(:id => 2)}}
+    let(:account) {double(:account, id: 1, bank_id: 2)}
+    let(:bank) {double(:bank, id: 2)}
     subject {actor.extend AccountAuthorizer}
 
     context "role_for" do

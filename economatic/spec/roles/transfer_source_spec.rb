@@ -12,7 +12,7 @@ module Economatic
       end
     end
 
-    let(:bank) {mock(:bank)}
+    let(:bank) {double(:bank)}
     let(:actor) { WithTransferSource.new(minimum_balance: nil, bank: bank) }
     subject { actor.extend(TransferSource) }
 
@@ -28,7 +28,7 @@ module Economatic
 
         context "with zero existing balance" do
           before do
-            subject.stub!(balance: Money.new(0.0))
+            subject.stub(balance: Money.new(0.0))
           end
 
           it "will allow if transfer wouldn't take me below minimum balance" do
@@ -42,7 +42,7 @@ module Economatic
 
         context "with existing balance" do
           before do
-            subject.stub!(balance: Money.new(10.0))
+            subject.stub(balance: Money.new(10.0))
           end
 
           it "will allow if my balance would not be below my minimum balance if this transfer was performed" do

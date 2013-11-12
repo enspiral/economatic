@@ -6,21 +6,27 @@ require 'playhouse/play'
 class App < Sinatra::Base
 end
 
-class Play < Playhouse::Play
+class TestPlay < Playhouse::Play
 end
 
 describe Playhouse::Sinatra do
   before(:each) do
+    stub_theatre
     App.register Playhouse::Sinatra
   end
-  it 'creates a plays setting' do
-    expect(App.settings.plays).to eq([])
+  describe 'register' do
+    subject {App.settings}
+    it 'creates a plays setting' do
+      expect(subject.plays).to eq([])
+    end
   end
 
-  describe 'plays' do
+  describe 'add_play' do
     before(:each) do
-      App.add_play
-
+      App.add_play TestPlay
+    end
+    it 'creates a new theatre for each play' do
+      expect(App.settings.plays.size).to eq(1)
     end
   end
 

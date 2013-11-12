@@ -1,6 +1,7 @@
+ENV['RACK_ENV'] = 'test'
 require File.join(File.expand_path(File.dirname(__FILE__)),'../../economatic')
 
-ENV['RACK_ENV'] = 'test'
+
 
 require "capybara"
 require "capybara/cucumber"

@@ -1,6 +1,9 @@
-Feature:
-  testing
+Feature: API Definition
+  In order to use the api
+  As a front end developer
+  I want to know which calls are available
 
   Scenario:
-    When I go to '/plays'
+    When I go to '/'
     Then I see 'economatic'
+    And I see 'account_balance_enquiry'

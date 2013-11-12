@@ -1,8 +1,7 @@
 task :environment do
   require 'playhouse/theatre'
   require 'economatic_core'
-  root_dir = File.join(File.dirname(__FILE__),'..')
-  theatre = Playhouse::Theatre.new(root: root_dir, environment: 'test')
+  theatre = Playhouse::Theatre.new(root: @root_dir, environment: 'test')
   theatre.start_staging
 end
 

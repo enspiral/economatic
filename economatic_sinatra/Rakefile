@@ -1,3 +1,4 @@
+@root_dir =  File.join(File.dirname(__FILE__))
 require 'economatic_rake'
 
 desc "Setup this app"

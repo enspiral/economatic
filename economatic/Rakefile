@@ -2,6 +2,7 @@ require 'active_support/core_ext/object/inclusion'
 
 load 'tasks/seed_fu.rake'
 
+@root_dir =  File.join(File.dirname(__FILE__))
 require 'economatic_rake'
 require 'rspec/core/rake_task'
 

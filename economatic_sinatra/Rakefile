@@ -1,7 +1,10 @@
+require 'economatic_rake'
+
 desc "Setup sinatra interface for CI"
 task :setup_ci do
-  puts "nothing to setup"
+  task 'db:reset'
 end
+
 
 require 'rubygems'
 require 'cucumber'
@@ -16,3 +19,4 @@ task :ci => [:features] do
 end
 
 task default: :ci
+

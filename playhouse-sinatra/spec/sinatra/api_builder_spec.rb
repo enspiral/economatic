@@ -7,19 +7,15 @@ describe Playhouse::Sinatra::ApiBuilder do
   let(:command_builder) {double(Playhouse::Sinatra::CommandBuilder)}
 
   before(:each) do
-    command_builder.stub(:build_command).and_return('method_name')
+    command_builder.stub(:build_command).and_return('method_hash')
     Playhouse::Sinatra::CommandBuilder.stub(:new).and_return(command_builder)
   end
 
   describe 'build_sinatra_api' do
     let(:result) {Playhouse::Sinatra::ApiBuilder.build_sinatra_api(api, app)}
 
-    it 'returns a hash with the api name as key' do
-      expect(result[:play]).to_not be_nil
-    end
-
     it 'returns an array of methods for each play' do
-      expect(result[:play]).to eq(['method_name', 'method_name'])
+      expect(result).to eq(['method_hash', 'method_hash'])
     end
 
     it 'calls command_builder.build_command for each command' do

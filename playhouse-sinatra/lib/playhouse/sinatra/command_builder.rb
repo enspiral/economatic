@@ -6,14 +6,31 @@ module Playhouse
         @app = sinatra_app
       end
       def build_command(command)
-        name = @api.name
-        @app.get "/#{name}/#{command.method_name}" do
-          settings.apis[name].send(command.method_name.to_sym, params).to_json
+        build_sinatra_calls(@api.name, command.method_name)
+        {"/#{@api.name}/#{command.method_name}" => build_options(command)}
+      end
+
+      private
+
+      def build_sinatra_calls(api_name, command_name)
+        @app.get "/#{api_name}/#{command_name}" do
+          settings.apis[api_name].send(command_name.to_sym, params).to_json
         end
-        @app.post "/#{@api.name}/#{command.method_name}" do
-          settings.apis[name].send(command.method_name.to_sym, params).to_json
+        @app.post "/#{api_name}/#{command_name}" do
+          settings.apis[api_name].send(command_name.to_sym, params).to_json
         end
-        command.method_name
+      end
+
+      def build_options(command)
+        options = []
+        command.parts.each do |part|
+          options << option_name(part)
+        end
+        options
+      end
+
+      def option_name(part)
+        part.repository ? "#{part.name}_id" : part.name
       end
     end
   end

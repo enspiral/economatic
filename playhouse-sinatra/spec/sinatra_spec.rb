@@ -7,6 +7,7 @@ class App < Sinatra::Base
 end
 
 class TestPlay < Playhouse::Play
+
 end
 
 describe Playhouse::Sinatra do
@@ -19,6 +20,9 @@ describe Playhouse::Sinatra do
     it 'creates a plays setting' do
       expect(subject.plays).to eq([])
     end
+    it 'creates an apis setting' do
+      expect(subject.apis).to eq({})
+    end
   end
 
   describe 'add_play' do
@@ -26,7 +30,7 @@ describe Playhouse::Sinatra do
       App.add_play TestPlay
     end
     it 'creates a new theatre for each play' do
-      expect(App.settings.plays.size).to eq(1)
+      expect(App.settings.apis.size).to eq(1)
     end
   end
 

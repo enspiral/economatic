@@ -8,7 +8,7 @@ module Playhouse
       theatre.stage do
         api = play.new
         settings.apis[api.name] = api
-        settings.plays << Playhouse::Sinatra::ApiBuilder.build_sinatra_api(api, self)
+        settings.plays.concat Playhouse::Sinatra::ApiBuilder.build_sinatra_api(api, self)
       end
     end
     def self.registered(app)

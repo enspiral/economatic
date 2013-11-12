@@ -1,10 +1,9 @@
 require 'economatic_rake'
 
-desc "Setup sinatra interface for CI"
+desc "Setup this app"
 task :setup_ci do
-  task 'db:reset'
+  task('db:reset').invoke
 end
-
 
 require 'rubygems'
 require 'cucumber'

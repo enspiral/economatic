@@ -2,6 +2,7 @@ require 'economatic/contexts/approve_transfer'
 
 When /^([^ ]*) transfers (#{CAPTURE_MONEY}) from (#{CAPTURE_ACCOUNT}) to (#{CAPTURE_ACCOUNT})(#{CAPTURE_WITH_DESCRIPTION})$/ do |user_name, amount, source_account, destination_account, description|
   user = @users[user_name]
+  amount = amount.fractional.to_s #check that composer works correctly
   api.transfer_money(
     source_account: source_account,
     destination_account: destination_account,

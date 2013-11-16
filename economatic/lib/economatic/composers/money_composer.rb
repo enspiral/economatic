@@ -1,7 +1,7 @@
 module Economatic
   class MoneyComposer
-    def compose(attributes)
-      Money.new(attributes['amount'])
+    def self.compose(amount)
+      Money.new(amount.gsub(',', '').to_f)
     end
   end
 end

@@ -10,9 +10,7 @@ module Economatic
     context TransferMoney
 
     # TODO: Need a way of grouping these in the API
-    context Accounts::Create
-    context Accounts::List
-    context Accounts::Update
+    contexts_for Accounts
 
     def self.name
       'economatic'

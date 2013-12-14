@@ -7,7 +7,7 @@ root_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 theatre = Playhouse::Theatre.new(root: root_dir, environment: 'development')
 theatre.stage do
-  play = Economatic::API.new
+  play = Economatic::EconomaticPlay.new
 
   EconomaticConsole = Playhouse::Console::ApiBuilder.build_console_api(play)
   EconomaticConsole.start(ARGV)

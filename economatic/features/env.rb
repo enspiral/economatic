@@ -14,6 +14,6 @@ if ENV['TRAVIS']
   Coveralls.wear!
 end
 
-def api
-  @api ||= Economatic::API.new
+def play
+  @play ||= Economatic::EconomaticPlay.new
 end

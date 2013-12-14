@@ -21,7 +21,7 @@ Given /^a user ([^ ]*) who can administer (#{CAPTURE_BANK})$/ do |user_name, ban
 end
 
 Then /^Total money in (#{CAPTURE_BANK}) is (#{CAPTURE_MONEY})$/ do |bank, expected_balance|
-  api.bank_balance_enquiry(bank: bank).should == expected_balance
+  play.bank_balance_enquiry(bank: bank).should == expected_balance
 end
 
 Then /^(#{CAPTURE_BANK}) has pending transfers totaling (#{CAPTURE_MONEY})$/ do |bank, amount|

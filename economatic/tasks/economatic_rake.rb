@@ -2,7 +2,7 @@ task :environment do
   require 'playhouse/theatre'
   require 'economatic_core'
   theatre = Playhouse::Theatre.new(root: @root_dir, environment: 'test')
-  theatre.start_staging
+  theatre.open
 end
 
 namespace :db do

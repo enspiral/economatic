@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/enspiral/playhouse-console.git
-  revision: a3cef388a66a59f58cc79ff5ed422d582f561271
-  specs:
-    playhouse-console (0.1.0)
-      playhouse
-      thor
-
-GIT
   remote: git://github.com/enspiral/playhouse-sinatra.git
   revision: 0b651e2523e185aecbd9eeb5fb5859faa5175ab5
   specs:
@@ -53,6 +45,15 @@ PATH
     economatic-sinatra (0.1.0)
       economatic
       playhouse-sinatra
+
+PATH
+  remote: /Users/craig/development/enspiral/playhouse-console
+  specs:
+    playhouse-console (0.1.0)
+      coveralls
+      playhouse
+      rspec
+      thor
 
 GEM
   remote: http://rubygems.org/

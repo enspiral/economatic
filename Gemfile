@@ -8,7 +8,7 @@ gem 'playhouse-sinatra', git: 'git://github.com/enspiral/playhouse-sinatra.git'
 
 #gem 'playhouse', path: '../playhouse'
 #gem 'playhouse-console', path: '../playhouse-console'
-#gem 'playhouse-sinatra', git: '../playhouse-sinatra'
+#gem 'playhouse-sinatra', path: '../playhouse-sinatra'
 
 gem 'economatic', path: './economatic'
 gem 'economatic-console', path: './economatic_console'

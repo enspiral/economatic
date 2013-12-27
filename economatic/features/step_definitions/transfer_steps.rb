@@ -27,13 +27,13 @@ Then /^(#{CAPTURE_ACCOUNT}) has a (#{CAPTURE_MONEY}) transfer by ([^ ]*) (to|fro
     destination_account = target_account
   end
 
-  source_transaction_scope = source_account.transactions.where(amount_cents: -amount.cents)
-  source_transaction_scope.should exist
+  source_entry_scope = source_account.entries.where(amount_cents: -amount.cents)
+  source_entry_scope.should exist
 
-  destination_transaction_scope = destination_account.transactions.where(amount_cents: amount.cents)
-  destination_transaction_scope.should exist
+  destination_entry_scope = destination_account.entries.where(amount_cents: amount.cents)
+  destination_entry_scope.should exist
 
-  valid_transfer_ids = source_transaction_scope.map(&:transfer_id) & destination_transaction_scope.map(&:transfer_id)
+  valid_transfer_ids = source_entry_scope.map(&:transfer_id) & destination_entry_scope.map(&:transfer_id)
 
   transfer_scope = Economatic::Transfer.where(id: valid_transfer_ids, creator_id: user.id)
   transfer_scope = transfer_scope.where(description: description) unless description.blank?

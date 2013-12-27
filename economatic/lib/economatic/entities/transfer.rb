@@ -2,7 +2,7 @@ require 'active_record'
 require 'support/money_attribute'
 require 'economatic/entities/account'
 require 'economatic/entities/user'
-require 'economatic/entities/transaction'
+require 'economatic/entities/entry'
 
 module Economatic
   class Transfer < ActiveRecord::Base
@@ -12,6 +12,6 @@ module Economatic
     belongs_to :source_account, class_name: 'Account'
     belongs_to :destination_account, class_name: 'Account'
     belongs_to :creator, class_name: 'User'
-    has_many   :transactions
+    has_many   :entries
   end
 end

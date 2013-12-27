@@ -5,7 +5,7 @@ ActiveRecord::Schema.define() do
     t.string   :description
   end
 
-  create_table :transactions do |t|
+  create_table :entries do |t|
     t.integer :account_id, :transfer_id, :amount_cents
     t.boolean :pending, :default => false
   end

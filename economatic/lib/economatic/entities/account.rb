@@ -1,7 +1,7 @@
 require 'active_record'
 require 'support/money_attribute'
 require 'economatic/entities/bank'
-require 'economatic/entities/transaction'
+require 'economatic/entities/entry'
 
 module Economatic
   class Account < ActiveRecord::Base
@@ -9,7 +9,7 @@ module Economatic
     money_attribute :minimum_balance
 
     belongs_to :bank
-    has_many :transactions
+    has_many :entries
     has_many :account_roles
 
     def external?

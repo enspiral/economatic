@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: git://github.com/enspiral/playhouse-sinatra.git
-  revision: 29c58d0ff51e4ae04e900c75b6f352f728494217
+  revision: fff11a1ebcfded42574067815671a2fc798dc787
   specs:
     playhouse-sinatra (0.1.0)
       playhouse
@@ -110,7 +110,7 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    rake (10.1.0)
+    rake (10.1.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec (2.14.1)

@@ -3,13 +3,13 @@ require 'economatic/entities/transfer'
 require 'money'
 
 module Economatic
-  module AccountTransactionCollection
+  module AccountEntryCollection
     include Playhouse::Role
 
     SUM_COLUMN = :amount_cents
 
     actor_dependency :id
-    actor_dependency :transactions
+    actor_dependency :entries
 
     def balance
       Money.new(non_pending.sum(SUM_COLUMN))
@@ -22,7 +22,7 @@ module Economatic
     end
 
     def base_scope
-      transactions
+      entries
     end
   end
 end

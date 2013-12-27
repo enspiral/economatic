@@ -12,7 +12,7 @@ module Economatic
     def perform
       # TODO: wrap in database Transaction
       TransferApproval.create!(approval_arguments)
-      transfer.approve_transactions!
+      transfer.approve_entries!
     end
 
     def approval_arguments

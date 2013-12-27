@@ -1,5 +1,5 @@
 require 'playhouse/role'
-require 'economatic/roles/account_transaction_collection'
+require 'economatic/roles/account_entry_collection'
 
 module Economatic
   module TransferSource
@@ -7,7 +7,7 @@ module Economatic
 
     actor_dependency :minimum_balance
     actor_dependency :bank
-    actor_dependency :balance, default_role: AccountTransactionCollection
+    actor_dependency :balance, default_role: AccountEntryCollection
     actor_dependency :id
 
     def can_decrease_money?(amount)
@@ -19,7 +19,7 @@ module Economatic
     end
 
     def decrease_money!(amount, transfer)
-      Transaction.create!(amount: -amount, transfer: transfer, account: self)
+      Entry.create!(amount: -amount, transfer: transfer, account: self)
     end
 
     private

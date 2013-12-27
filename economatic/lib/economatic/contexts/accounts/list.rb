@@ -10,7 +10,7 @@ module Economatic
       actor :user, repository: User, role: AccountAuthorizer
 
       def perform
-        AccountTransactionCollection.cast_all accounts_scope
+        AccountEntryCollection.cast_all accounts_scope
       end
 
       private

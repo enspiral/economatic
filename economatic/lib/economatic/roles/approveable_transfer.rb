@@ -4,10 +4,10 @@ module Economatic
   module ApproveableTransfer
     include Playhouse::Role
 
-    def approve_transactions!
-      transactions.where(pending: true).each do |transaction|
-        transaction.pending = false
-        transaction.save!
+    def approve_entries!
+      entries.where(pending: true).each do |entry|
+        entry.pending = false
+        entry.save!
       end
     end
   end

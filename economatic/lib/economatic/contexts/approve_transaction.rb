@@ -1,18 +1,18 @@
 require 'playhouse/context'
-require 'economatic/roles/approveable_transfer'
-require 'economatic/entities/transfer_approval'
+require 'economatic/roles/approveable_transaction'
+require 'economatic/entities/transaction_approval'
 
 module Economatic
-  class ApproveTransfer < Playhouse::Context
-    actor :transfer, role: ApproveableTransfer, repository: Transfer
+  class ApproveTransaction < Playhouse::Context
+    actor :transaction, role: ApproveableTransaction, repository: Transaction
     actor :time, optional: true
     actor :description, optional: true
     actor :approver, repository: User
 
     def perform
       # TODO: wrap in database Transaction
-      TransferApproval.create!(approval_arguments)
-      transfer.approve_entries!
+      TransactionApproval.create!(approval_arguments)
+      transaction.approve_entries!
     end
 
     def approval_arguments
@@ -20,7 +20,7 @@ module Economatic
         time: time || Time.now,
         description: description,
         approver: approver,
-        transfer: transfer
+        transaction: transaction
       }
     end
   end

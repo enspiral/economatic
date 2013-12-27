@@ -5,7 +5,7 @@ require 'economatic/entities/user'
 require 'economatic/entities/entry'
 
 module Economatic
-  class Transfer < ActiveRecord::Base
+  class Transaction < ActiveRecord::Base
     include MoneyAttribute
     money_attribute :amount
 

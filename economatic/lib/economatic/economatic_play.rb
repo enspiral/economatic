@@ -5,7 +5,7 @@ require_all File.dirname(__FILE__), 'contexts/**/*.rb'
 module Economatic
   class EconomaticPlay < Playhouse::Play
     context AccountBalanceEnquiry
-    context ApproveTransfer
+    context ApproveTransaction
     context BankBalanceEnquiry
     context TransferMoney
 

@@ -1,10 +1,10 @@
 require 'active_record'
 require 'economatic/entities/user'
-require 'economatic/entities/transfer'
+require 'economatic/entities/transaction'
 
 module Economatic
-  class TransferApproval < ActiveRecord::Base
+  class TransactionApproval < ActiveRecord::Base
     belongs_to :approver, class_name: 'User'
-    belongs_to :transfer
+    belongs_to :transaction
   end
 end

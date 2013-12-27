@@ -1,7 +1,7 @@
 require 'playhouse/role'
 
 module Economatic
-  module ApproveableTransfer
+  module ApproveableTransaction
     include Playhouse::Role
 
     def approve_entries!

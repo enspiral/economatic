@@ -1,6 +1,6 @@
 require 'active_record'
 require 'economatic/entities/account'
-require 'economatic/entities/transfer'
+require 'economatic/entities/transaction'
 require 'support/money_attribute'
 
 module Economatic
@@ -9,6 +9,6 @@ module Economatic
     money_attribute :amount
 
     belongs_to :account
-    belongs_to :transfer
+    belongs_to :transaction
   end
 end

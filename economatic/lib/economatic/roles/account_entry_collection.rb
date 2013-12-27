@@ -1,5 +1,5 @@
 require 'playhouse/role'
-require 'economatic/entities/transfer'
+require 'economatic/entities/transaction'
 require 'money'
 
 module Economatic

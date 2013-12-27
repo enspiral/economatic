@@ -1,20 +1,20 @@
 ActiveRecord::Schema.define() do
-  create_table :transfers do |t|
+  create_table :transactions do |t|
     t.datetime :time
     t.integer  :creator_id
     t.string   :description
   end
 
   create_table :entries do |t|
-    t.integer :account_id, :transfer_id, :amount_cents
+    t.integer :account_id, :transaction_id, :amount_cents
     t.boolean :pending, :default => false
   end
 
-  create_table :transfer_approvals do |t|
+  create_table :transaction_approvals do |t|
     t.datetime :time
     t.integer  :approver_id
     t.string   :description
-    t.integer  :transfer_id
+    t.integer  :transaction_id
   end
 
   create_table :accounts do |t|

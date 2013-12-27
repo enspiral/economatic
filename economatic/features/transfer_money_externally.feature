@@ -28,7 +28,7 @@ Feature: Can transfer money between bank and external sources
 
   Scenario: Pending outgoing transfer is approved by bank administrator and is applied
     When Bond transfers $50,000 from BondGoldCard account to FieldExpenses account with description "Martinis"
-    When M approves transfer "Martinis" with description "Oh James"
+    When M approves transaction "Martinis" with description "Oh James"
     Then BondGoldCard account has a balance of $-50,000
     Then FieldExpenses account has a balance of $50,000
     Then MI6 bank has pending transfers totaling $0

@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'economatic/roles/transaction_source'
+require 'economatic/roles/transfer_source'
 require 'money'
 
 module Economatic
-  describe TransactionSource do
+  describe TransferSource do
     class WithTransactionSource
       attr_accessor :minimum_balance, :bank
       def initialize(params)
@@ -14,7 +14,7 @@ module Economatic
 
     let(:bank) {double(:bank)}
     let(:actor) { WithTransactionSource.new(minimum_balance: nil, bank: bank) }
-    subject { actor.extend(TransactionSource) }
+    subject { actor.extend(TransferSource) }
 
     describe '.can_decrease_money?' do
       context "with no minimum balance" do

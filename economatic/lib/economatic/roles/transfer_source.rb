@@ -2,7 +2,7 @@ require 'playhouse/role'
 require 'economatic/roles/account_entry_collection'
 
 module Economatic
-  module TransactionSource
+  module TransferSource
     include Playhouse::Role
 
     actor_dependency :minimum_balance

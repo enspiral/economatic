@@ -1,7 +1,7 @@
 require 'playhouse/role'
 
 module Economatic
-  module TransactionDestination
+  module TransferDestination
     include Playhouse::Role
 
     actor_dependency :id
